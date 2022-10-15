@@ -58,6 +58,7 @@ non terminal Statement statement;
 non terminal StatementList statements;
 non terminal IfEnd ifend;
 non terminal Expression expression;
+non terminal Name name;
 non terminal Binaryop binaryop;
 
 program ::= statements:ss
@@ -71,7 +72,16 @@ statements ::= statement:s statements:ss
     ;
 
 statement ::= IF:if LEFT_PAREN:lp expression:e RT_PAREN:rp LEFT_BRACE:lb statements:ss RT_BRACE:rb ifend:ie
-    {:RESULT = new Statement():}
+    {:RESULT = new IfStatement(e, ss, ie);:}
+    |
+    WHILE:w LEFT_PAREN:lp expression:e RT_PAREN:rp LEFT_BRACE:lb statements:ss RT_BRACE:rb
+    {:RESULT = new WhileStatement(e, ss);:}
+    |
+    name:n ASSMNT:a expression:e SEMI:s
+    {:RESULT = new AssignmentStatement(n, e);:}
+    |
+    
+
 
 binaryop ::= TIMES:t
     {:RESULT = new Binaryop(t);:}
