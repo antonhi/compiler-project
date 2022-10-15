@@ -59,6 +59,11 @@ non terminal StatementList statements;
 non terminal IfEnd ifend;
 non terminal Expression expression;
 non terminal Name name;
+non terminal ReadList readlist;
+non terminal PrintList printlist;
+non terminal PrintLineList printlinelist;
+non terminal Args args;
+non terminal Type type;
 non terminal Binaryop binaryop;
 
 program ::= statements:ss
@@ -80,12 +85,158 @@ statement ::= IF:if LEFT_PAREN:lp expression:e RT_PAREN:rp LEFT_BRACE:lb stateme
     name:n ASSMNT:a expression:e SEMI:s
     {:RESULT = new AssignmentStatement(n, e);:}
     |
-    
+    READ:r LEFT_PAREN:lp readlist:rl RT_PAREN:rp SEMI:s
+    {:RESULT = new ReadStatement(rl);:}
+    |
+    PRINT:p LEFT_PAREN:lp printlist:pl RT_PAREN:rp SEMI:s
+    {:RESULT = new PrintStatement(pl);:}
+    |
+    PRINTLN:p LEFT_PAREN:lp printlinelist:pll RT_PAREN:rp SEMI:s
+    {:RESULT = new PrintLineStatement(pll);:}
+    |
+    ID:id LEFT_PAREN:lp RT_PAREN:rp SEMI:s
+    {:RESULT = new ConstructorStatement(id);:}
+    |
+    ID:id LEFT_PAREN:lp args:a RT_PAREN:rp SEMI:s
+    {:RESULT = new ParameterConstructorStatement(id, a);:}
+    |
+    RETURN:r SEMI:s
+    {:RESULT = new ReturnStatement();:}
+    |
+    RETURN:r expression:e SEMI:s
+    {:RESULT = new ReturnExpressionStatement(e);:}
+    |
+    name:n PLUSPLUS:pp SEMI:s
+    {:RESULT = new AddStatement(n);:}
+    |
+    name:n MINUSMINUS:mm SEMI:s
+    {:RESULT = new SubtractStatement(n);:}
+    |
+    LEFT_BRACE:lb statements:ss RT_BRACE:rb
+    {:RESULT = new BodyStatement(ss);:}
+    ;
 
+ifend ::= ELSE LEFT_BRACE statements:ss RT_BRACE
+    {:RESULT = new IfEnd(ss);:}
+    |
+    {:RESULT = new IfEnd();:}
+    ;
+
+name ::= ID:id LEFT_BRKT expression:e RT_BRKT
+    {:RESULT = new IdExpressionName(id, e);:}
+    |
+    ID:id
+    {:RESULT = new IdName(id);:}
+    ;
+
+args ::= expression:e COMMA args:a
+    {:RESULT = a.prepend(e);:}
+    |
+    expression:e
+    {:RESULT = new Args().prepend(e);:}
+    ;
+
+readlist ::= name:n COMMA readlist:r
+    {:RESULT = r.prepend(n);:}
+    |
+    name:n
+    {:RESULT = new ReadList().prepend(n);:}
+    ;
+
+printlist ::= expression:e COMMA printlist:p
+    {:RESULT = p.prepend(e);:}
+    |
+    expression:e
+    {:RESULT = new PrintList().prepend(e);:}
+    ;
+
+printlinelist ::= printlist:p
+    {:RESULT = new PrintLineList(p);:}
+    |
+    {:RESULT = new PrintLineList();:}
+    ;
+
+expression ::= name:n
+    {:RESULT = new NameExpression(n);:}
+    |
+    ID:id LEFT_PAREN RT_PAREN
+    {:RESULT = new ConstructorExpression(id);:}
+    |
+    ID:id LEFT_PAREN args:a RT_PAREN
+    {:RESULT = new ParameterConstructorExpression(a, id);:}
+    |
+    INTLIT:i
+    {:RESULT = new IntegerExpression(i);:}
+    |
+    CHARLIT:c
+    {:RESULT = new CharacterExpression(c);:}
+    |
+    STRINGLIT:s
+    {:RESULT = new StringExpression(s);:}
+    |
+    FLOATLIT:f
+    {:RESULT = new FloatExpression(f);:}
+    |
+    TRUE
+    {:RESULT = new TrueExpression();:}
+    |
+    FALSE
+    {:RESULT = new FalseExpression();:}
+    |
+    LEFT_PAREN expression:e RT_PAREN
+    {:RESULT = new NestedExpression(e);:}
+    |
+    NOT expression:e
+    {:RESULT = new NotExpression(e);:}
+    |
+    MINUS expression:e
+    {:RESULT = new NegateExpression(e);:}%prec PREFIXMINUS
+    |
+    PLUS expression:e
+    {:RESULT = new PositiveExpression(e);:}%prec PREFIXPLUS
+    |
+    LEFT_PAREN type:t RT_PAREN expression:e
+    {:RESULT = new CastExpression(t, e);:}
+    |
+    expression:eone binaryop:b expression:etwo
+    {:RESULT = new BinaryExpression(eone, etwo, b);:}
+    |
+    LEFT_PAREN expression:eone CONDITION expression:etwo COLON expression:ethree RT_PAREN
+    {:RESULT = new TertiaryExpression(eone, etwo, ethree);:}
+    ;
 
 binaryop ::= TIMES:t
-    {:RESULT = new Binaryop(t);:}
+    {:RESULT = new Binaryop((String)t);:}
     |
     DIVIDE:d
-    {:RESULT = new Binaryop(d);:}
+    {:RESULT = new Binaryop((String)d);:}
+    |
+    PLUS:p
+    {:RESULT = new Binaryop((String)p);:}
+    |
+    MINUS:m
+    {:RESULT = new Binaryop((String)m);:}
+    |
+    LESS:l
+    {:RESULT = new Binaryop((String)l);:}
+    |
+    GTR:g
+    {:RESULT = new Binaryop((String)g);:}
+    |
+    LESS_EQ:l
+    {:RESULT = new Binaryop((String)l);:}
+    |
+    GTR_EQ:g
+    {:RESULT = new Binaryop((String)g);:}
+    |
+    EQ:e
+    {:RESULT = new Binaryop((String)e);:}
+    |
+    NOT_EQ:n
+    {:RESULT = new Binaryop((String)n);:}
+    |
+    OR:o
+    {:RESULT = new Binaryop((String)o);:}
+    AND:a
+    {:RESULT = new Binaryop((String)a);:}
     ;
