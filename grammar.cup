@@ -66,6 +66,15 @@ non terminal Args args;
 non terminal Type type;
 non terminal Binaryop binaryop;
 
+precedence right CONDITION, COLON;
+precedence left OR;
+precedence left AND;
+precedence left NOT_EQ, EQ;
+precedence left LESS, GTR, LESS_EQ, GTR_EQ;
+precedence left PLUS, MINUS;
+precedence left TIMES, DIVIDE;
+precedence right MINUSMINUS, PLUSPLUS, NOT;
+
 program ::= statements:ss
     {:RESULT = new Program(ss);:}
     ;
