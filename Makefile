@@ -14,7 +14,12 @@ default: run
 
 FILE=    Lexer.java      parser.java    sym.java \
     LexerTest.java      ScannerTest.java      Token.java \
-	Program.java      Binaryop.java
+	Program.java      Binaryop.java      AddStatement.java \
+	Args.java      AssignmentStatement.java      BinaryExpression.java \
+	BodyStatement.java      CastExpression.java      CharacterExpression.java \
+	ConstructorExpression.java      ConstructorStatement.java      Expression.java      FalseExpression.java      FloatExpression.java      IdExpressionName.java      IdName.java      IfEnd.java      IfStatement.java      IntegerExpression.java      Name.java      NameExpression.java \
+	NegateExpression.java      NestedExpression.java      NotExpression.java \
+	ParameterConstructorExpression.java      ParameterConstructorStatement.java      PositiveExpression.java      PrintLineList.java      PrintLineStatement.java      PrintList.java      PrintStatement.java      ReadList.java      ReadStatement.java      ReturnExpressionStatement.java      ReturnStatement.java      Statement.java      StatementList.java      StringExpression.java      SubtractStatement.java      TertiaryExpression.java      TrueExpression.java      Type.java      WhileStatement.java
 
 run: Phase2_empty.txt
 
