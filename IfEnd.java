@@ -12,7 +12,7 @@ public class IfEnd extends Token {
 
     @Override
     public String toString(int t) {
-        return getTabs(t) + (statementList == null ? "" : "else {\n" + statementList.toString(t+1) + getTabs(t) + "}");
+        return (statementList == null ? "" : "else {\n" + statementList.toString(t+1) + getTabs(t) + "}");
     }
     
 }

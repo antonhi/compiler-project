@@ -8,7 +8,7 @@ public class CharacterExpression extends Expression {
 
     @Override
     public String toString(int t) {
-        return getTabs(t) + character;
+        return getTabs(t) + "(" + character + ")";
     }
     
 }

@@ -12,7 +12,7 @@ public class IfStatement extends Statement {
 
     @Override
     public String toString(int t) {
-        return getTabs(t) + "if (" + expression.toString(0) + ") {\n" + statements.toString(t+1) + getTabs(t) + "} " + ifEnd.toString(0) + "\n";
+        return getTabs(t) + "if (" + expression.toString(0) + ") {\n" + statements.toString(t+1) + getTabs(t) + "} " + ifEnd.toString(t) + "\n";
     }
     
 }

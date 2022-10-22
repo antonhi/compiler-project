@@ -8,7 +8,7 @@ public class ConstructorExpression extends Expression {
 
     @Override
     public String toString(int t) {
-        return getTabs(t) + id + "()";
+        return getTabs(t) + "(" + id + "())";
     }
     
 }

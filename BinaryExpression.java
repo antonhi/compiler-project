@@ -11,7 +11,7 @@ public class BinaryExpression extends Expression {
 
     @Override
     public String toString(int t) {
-        return getTabs(t) + expression1.toString(0) + " " + binaryop.toString(0) + " " + expression2.toString(0);
+        return getTabs(t) + "(" + expression1.toString(0) + " " + binaryop.toString(0) + " " + expression2.toString(0) + ")";
     }
     
 }

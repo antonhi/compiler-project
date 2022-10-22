@@ -10,7 +10,7 @@ public class CastExpression extends Expression {
 
     @Override
     public String toString(int t) {
-        return getTabs(t) + "(" + type.toString(0) + ") " + expression.toString(0);
+        return getTabs(t) + "((" + type.toString(0) + ") " + expression.toString(0) + ")";
     }
     
 }

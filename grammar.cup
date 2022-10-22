@@ -65,6 +65,7 @@ non terminal PrintLineList printlinelist;
 non terminal Args args;
 non terminal Type type;
 non terminal Binaryop binaryop;
+non terminal OptionalSemi optionalsemi;
 
 precedence right CONDITION, COLON;
 precedence left OR;
@@ -76,53 +77,53 @@ precedence left TIMES, DIVIDE;
 precedence right MINUSMINUS, PLUSPLUS, NOT;
 
 program ::= statements:ss
-    {:RESULT = new Program(ss);:}
+    {: RESULT = new Program(ss); :}
     ;
 
 statements ::= statement:s statements:ss
-    {:RESULT = ss.prepend(s);:}
+    {: RESULT = ss.prepend(s); :}
     |
-    {:RESULT = new StatementList();:}
+    {: RESULT = new StatementList(); :}
     ;
 
-statement ::= IF:if LEFT_PAREN:lp expression:e RT_PAREN:rp LEFT_BRACE:lb statements:ss RT_BRACE:rb ifend:ie
+statement ::= IF LEFT_PAREN expression:e RT_PAREN LEFT_BRACE statements:ss RT_BRACE ifend:ie
     {:RESULT = new IfStatement(e, ss, ie);:}
     |
-    WHILE:w LEFT_PAREN:lp expression:e RT_PAREN:rp LEFT_BRACE:lb statements:ss RT_BRACE:rb
+    WHILE:w LEFT_PAREN expression:e RT_PAREN LEFT_BRACE statements:ss RT_BRACE
     {:RESULT = new WhileStatement(e, ss);:}
     |
-    name:n ASSMNT:a expression:e SEMI:s
+    name:n ASSMNT expression:e SEMI
     {:RESULT = new AssignmentStatement(n, e);:}
     |
-    READ:r LEFT_PAREN:lp readlist:rl RT_PAREN:rp SEMI:s
+    READ LEFT_PAREN readlist:rl RT_PAREN SEMI
     {:RESULT = new ReadStatement(rl);:}
     |
-    PRINT:p LEFT_PAREN:lp printlist:pl RT_PAREN:rp SEMI:s
+    PRINT LEFT_PAREN printlist:pl RT_PAREN SEMI
     {:RESULT = new PrintStatement(pl);:}
     |
-    PRINTLN:p LEFT_PAREN:lp printlinelist:pll RT_PAREN:rp SEMI:s
+    PRINTLN LEFT_PAREN printlinelist:pll RT_PAREN SEMI
     {:RESULT = new PrintLineStatement(pll);:}
     |
-    ID:id LEFT_PAREN:lp RT_PAREN:rp SEMI:s
+    ID:id LEFT_PAREN RT_PAREN SEMI
     {:RESULT = new ConstructorStatement(id);:}
     |
-    ID:id LEFT_PAREN:lp args:a RT_PAREN:rp SEMI:s
+    ID:id LEFT_PAREN args:a RT_PAREN SEMI
     {:RESULT = new ParameterConstructorStatement(id, a);:}
     |
-    RETURN:r SEMI:s
+    RETURN SEMI
     {:RESULT = new ReturnStatement();:}
     |
-    RETURN:r expression:e SEMI:s
+    RETURN expression:e SEMI
     {:RESULT = new ReturnExpressionStatement(e);:}
     |
-    name:n PLUSPLUS:pp SEMI:s
+    name:n PLUSPLUS SEMI
     {:RESULT = new AddStatement(n);:}
     |
-    name:n MINUSMINUS:mm SEMI:s
+    name:n MINUSMINUS SEMI
     {:RESULT = new SubtractStatement(n);:}
     |
-    LEFT_BRACE:lb statements:ss RT_BRACE:rb
-    {:RESULT = new BodyStatement(ss);:}
+    LEFT_BRACE statements:ss RT_BRACE optionalsemi:o
+    {:RESULT = new BodyStatement(ss, o);:}
     ;
 
 ifend ::= ELSE LEFT_BRACE statements:ss RT_BRACE
@@ -246,6 +247,26 @@ binaryop ::= TIMES:t
     |
     OR:o
     {:RESULT = new Binaryop((String)o);:}
+    |
     AND:a
     {:RESULT = new Binaryop((String)a);:}
+    ;
+
+type ::= INT:i
+    {:RESULT = new Type((String)i);:}
+    |
+    CHAR:c
+    {:RESULT = new Type((String)c);:}
+    |
+    BOOL:b
+    {:RESULT = new Type((String)b);:}
+    |
+    FLOAT:f
+    {:RESULT = new Type((String)f);:}
+    ;
+
+optionalsemi ::= SEMI
+    {:RESULT = new OptionalSemi(true);:}
+    |
+    {:RESULT = new OptionalSemi(false);:}
     ;

@@ -10,7 +10,7 @@ public class ParameterConstructorExpression extends Expression {
 
     @Override
     public String toString(int t) {
-        return getTabs(t) + id + "(" + args.toString(0) + ")";
+        return getTabs(t) + "(" + id + "(" + args.toString(0) + "))";
     }
     
 }

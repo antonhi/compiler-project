@@ -10,7 +10,7 @@ public class AssignmentStatement extends Statement {
 
     @Override
     public String toString(int t) {
-        return getTabs(t) + name.toString(0) + " = " + expression.toString(0) + ";";
+        return getTabs(t) + name.toString(0) + " = " + expression.toString(0) + ";\n";
     }
     
 }

@@ -8,7 +8,7 @@ public class StringExpression extends Expression {
 
     @Override
     public String toString(int t) {
-        return getTabs(t) + string;
+        return getTabs(t) + "(" + string + ")";
     }
     
 }

@@ -17,8 +17,9 @@ public class ReadList extends Token {
     @Override
     public String toString(int t) {
         String result = "";
+        int index = 0;
         for (Name n : names) {
-            result += n.toString(0) + ", ";
+            result += n.toString(0) + (++index == names.size() ? "" : ", ");
         }
         return result;
     }

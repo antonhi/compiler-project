@@ -8,7 +8,7 @@ public class NameExpression extends Expression {
 
     @Override
     public String toString(int t) {
-        return getTabs(t) + name.toString(0);
+        return getTabs(t) + "(" + name.toString(0) + ")";
     }
     
 }

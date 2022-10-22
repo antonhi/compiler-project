@@ -1,1 +1,1 @@
-instead expected token classes are [EOF]
+instead expected token classes are [EOF, WHILE, READ, PRINT, PRINTLN, RETURN, LEFT_BRACE, ID]

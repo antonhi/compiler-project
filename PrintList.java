@@ -16,8 +16,9 @@ public class PrintList extends Token {
     @Override
     public String toString(int t) {
         String result = "";
+        int index = 0;
         for (Expression e : expressions) {
-            result += e.toString(0) + ", ";
+            result += e.toString(0) + (++index == expressions.size() ? "" : ", ");
         }
         return result;
     }

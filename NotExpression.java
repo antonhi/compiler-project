@@ -8,7 +8,7 @@ public class NotExpression extends Expression {
 
     @Override
     public String toString(int t) {
-        return getTabs(t) + "~" + expression.toString(0);
+        return getTabs(t) + "(~" + expression.toString(0) + ")";
     }
     
 }
