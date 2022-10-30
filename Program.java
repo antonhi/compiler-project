@@ -1,10 +1,14 @@
 public class Program extends Token {
-    private final StatementList program;
-    public Program (StatementList statements) {
-        this.program = statements;
+
+    private final String id;
+    private final Memberdecls memberdecls;
+
+    public Program (String id, Memberdecls memberdecls) {
+        this.id = id;
+        this.memberdecls = memberdecls;
     }
 
     public String toString(int t) {
-        return "Program:\n" + program.toString(t+1) + "\n";
+        return "class " + id + " {\n" + memberdecls.toString(t+1) + "\n}";
     }
 }

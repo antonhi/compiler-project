@@ -8,7 +8,7 @@ public class Returntype extends Token {
 
     @Override
     public String toString(int t) {
-        return type == null ? "void" : type.toString(t); 
+        return type == null ? getTabs(t) + "void" : type.toString(t); 
     }
     
 }

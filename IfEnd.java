@@ -1,18 +1,37 @@
 public class IfEnd extends Token {
 
+    private FielddeclList fielddecls;
     private StatementList statementList;
 
     public IfEnd () {
         statementList = null;
+        fielddecls = null;
     }
 
-    public IfEnd (StatementList statementList) {
+    public IfEnd (FielddeclList fielddecls, StatementList statementList) {
         this.statementList = statementList;
+        this.fielddecls = fielddecls;
     }
 
     @Override
     public String toString(int t) {
-        return (statementList == null ? "" : "else {\n" + statementList.toString(t+1) + getTabs(t) + "}");
+        String result = "";
+        if (fielddecls != null || statementList != null) {
+            result += "else {\n";
+        }
+        if (fielddecls != null) {
+            result += fielddecls.toString(t+1);
+        }
+        if (statementList != null) {
+            if (fielddecls != null) {
+                result += "\n";
+            }
+            result += statementList.toString(t+1);
+        }
+        if (fielddecls != null || statementList != null) {
+            result += getTabs(t) + "}";
+        }
+        return result;
     }
     
 }
