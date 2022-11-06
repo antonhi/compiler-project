@@ -12,16 +12,17 @@ default: run
 .java.class:
 		$(JAVAC) -cp $(CP) $*.java
 
-FILE=    Lexer.java parser.java sym.java LexerTest.java ScannerTest.java Token.java Program.java Binaryop.java AddStatement.java Args.java AssignmentStatement.java BinaryExpression.java BodyStatement.java CastExpression.java CharacterExpression.java ConstructorExpression.java ConstructorStatement.java Expression.java FalseExpression.java FloatExpression.java IdExpressionName.java IdName.java IfEnd.java IfStatement.java IntegerExpression.java Name.java NameExpression.java NegateExpression.java NestedExpression.java NotExpression.java ParameterConstructorExpression.java ParameterConstructorStatement.java PositiveExpression.java PrintLineList.java PrintLineStatement.java PrintList.java PrintStatement.java ReadList.java ReadStatement.java ReturnExpressionStatement.java ReturnStatement.java Statement.java StatementList.java StringExpression.java SubtractStatement.java TertiaryExpression.java TrueExpression.java Type.java WhileStatement.java
+FILE=    Lexer.java parser.java sym.java LexerTest.java ScannerTest.java Token.java Program.java Binaryop.java AddStatement.java Argdecl.java ArgdeclList.java Argdecls.java Args.java ArrayFielddecl.java AssignmentStatement.java BinaryExpression.java BodyStatement.java CastExpression.java CharacterExpression.java CommentStatement.java ConstructorExpression.java ConstructorStatement.java EqualExpression.java Expression.java ExpressionFielddecl.java FalseExpression.java Fielddecl.java FielddeclList.java FloatExpression.java IdExpressionName.java IdName.java IfEnd.java IfStatement.java IntegerExpression.java Memberdecls.java Methoddecl.java MethoddeclList.java Name.java NameExpression.java NegateExpression.java NestedExpression.java NotExpression.java OptionalExpr.java OptionalFinal.java OptionalSemi.java ParameterConstructorExpression.java ParameterConstructorStatement.java PositiveExpression.java PrintLineList.java PrintLineStatement.java PrintList.java PrintStatement.java ReadList.java ReadStatement.java ReturnExpressionStatement.java ReturnStatement.java Returntype.java Statement.java StatementList.java StringExpression.java SubtractStatement.java TertiaryExpression.java TrueExpression.java Type.java WhileStatement.java
 
-run: phase1.txt
+run: phase2.txt
 
 all: Lexer.java parser.java $(FILE:java=class)
 
-phase1.txt: all
-		$(JAVA) -cp $(CP) ScannerTest Phase1_expressions.txt > Phase1_expressions_output.txt
-		$(JAVA) -cp $(CP) ScannerTest Phase1_order_of_ops.txt > Phase1_order_of_ops_output.txt
-		$(JAVA) -cp $(CP) ScannerTest Phase1_statements.txt > Phase1_statements_output.txt
+phase2.txt: all
+		$(JAVA) -cp $(CP) ScannerTest Phase2_empty.txt > Phase2_empty_output.txt
+		$(JAVA) -cp $(CP) ScannerTest Phase2_fields.txt > Phase2_fields_output.txt
+		$(JAVA) -cp $(CP) ScannerTest Phase2_methods.txt > Phase2_methods_output.txt
+		$(JAVA) -cp $(CP) ScannerTest Phase2_full.txt > Phase2_full_output.txt
 
 Phase1_order_of_ops.txt: all
         $(JAVA) -cp $(CP) LexerTest Phase1_order_of_ops.txt > Phase1_order_of_ops_output.txt

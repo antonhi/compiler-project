@@ -129,7 +129,7 @@ false		        { return newSym(sym.FALSE, "false"); }
 {floatlit}      { return newSym(sym.FLOATLIT, new Double(yytext())); }
 {charlit}       { return newSym(sym.CHARLIT, yytext()); }
 {stringlit}	    { return newSym(sym.STRINGLIT, yytext()); }
-{inlinecomment} { /* For this stand-alone lexer, print out comments. */}
+{inlinecomment} { return newSym(sym.INLINECOMMENT, yytext());}
 {blockcomment}	{ /* For this stand-alone lexer, print out comments. */}
 {whitespace}    { /* Ignore whitespace. */ }
 .               { System.out.println("Illegal char, '" + yytext() +

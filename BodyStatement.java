@@ -12,7 +12,7 @@ public class BodyStatement extends Statement {
 
     @Override
     public String toString(int t) {
-        return getTabs(t) + "{\n" + fielddecls.toString(t+1) + "\n" + statements.toString(t+1) + getTabs(t) + "}" +optionalSemi.toString(0) + "\n";
+        return getTabs(t) + "{\n" + fielddecls.toString(t+1) + (fielddecls.isEmpty() ? "" : "\n") + statements.toString(t+1) + getTabs(t) + "}" +optionalSemi.toString(0) + "\n";
     }
     
 }

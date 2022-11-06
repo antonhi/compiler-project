@@ -52,6 +52,7 @@ terminal int INTLIT;      //47
 terminal double FLOATLIT; //48
 terminal String CHARLIT;  //49
 terminal String STRINGLIT;//50
+terminal String INLINECOMMENT;//51
 
 non terminal Program program;
 non terminal Memberdecls memberdecls;
@@ -91,31 +92,60 @@ program ::= CLASS ID:id LEFT_BRACE memberdecls:m RT_BRACE
     {: RESULT = new Program(id, m); :}
     ;
 
-memberdecls ::= fielddecls:f methoddecls:m
-    {:RESULT = new Memberdecls(f, m);:}
+memberdecls ::= FINAL type:t ID:id optionalexpr:oe SEMI memberdecls:m
+    {:RESULT = m.fieldsPrepend(new ExpressionFielddecl(true, t, id, oe));:}
+    |
+    type:t ID:id optionalexpr:oe SEMI memberdecls:m
+    {:RESULT = m.fieldsPrepend(new ExpressionFielddecl(false, t, id, oe));:}
+    |
+    type:t ID:id LEFT_BRKT INTLIT:il RT_BRKT SEMI memberdecls:m
+    {:RESULT = m.fieldsPrepend(new ArrayFielddecl(t, id, il));:}
+    |
+    type:t ID:id LEFT_PAREN argdecls:a RT_PAREN LEFT_BRACE fielddecls:f statements:ss RT_BRACE optionalsemi:os memberdecls:m
+    {:RESULT = m.methodsPrepend(new Methoddecl(t, id, a, f, ss, os));:}
+    |
+    VOID ID:id LEFT_PAREN argdecls:a RT_PAREN LEFT_BRACE fielddecls:f statements:ss RT_BRACE optionalsemi:os memberdecls:m
+    {:RESULT = m.methodsPrepend(new Methoddecl(null, id, a, f, ss, os));:}
+    |
+    {:RESULT = new Memberdecls();:}
     ;
 
-fielddecls ::= fielddecl:f fielddecls:ff
-    {:RESULT = ff.prepend(f);:}
+fielddecls ::= FINAL type:t ID:id optionalexpr:oe SEMI fielddecls:ff
+    {:RESULT = ff.prepend(new ExpressionFielddecl(true, t, id, oe));:}
+    |
+    type:t ID:id optionalexpr:oe SEMI fielddecls:ff
+    {:RESULT = ff.prepend(new ExpressionFielddecl(false, t, id, oe));:}
+    |
+    type:t ID:id LEFT_BRKT INTLIT:il RT_BRKT SEMI fielddecls:ff
+    {:RESULT = ff.prepend(new ArrayFielddecl(t, id, il));:}
     |
     {:RESULT = new FielddeclList();:}
     ;
 
-methoddecls ::= methoddecl:m methoddecls:mm
-    {:RESULT = mm.prepend(m);:}
+methoddecls ::= type:t ID:id LEFT_PAREN argdecls:a RT_PAREN LEFT_BRACE fielddecls:f statements:ss RT_BRACE optionalsemi:os methoddecls:mm
+    {:RESULT = mm.prepend(new Methoddecl(t, id, a, f, ss, os));:}
+    |
+    VOID ID:id LEFT_PAREN argdecls:a RT_PAREN LEFT_BRACE fielddecls:f statements:ss RT_BRACE optionalsemi:os methoddecls:mm
+    {:RESULT = mm.prepend(new Methoddecl(null, id, a, f, ss, os));:}
     |
     {:RESULT = new MethoddeclList();:}
     ;
 
-fielddecl ::= optionalfinal:of type:t ID:id optionalexpr:oe SEMI
-    {:RESULT = new ExpressionFielddecl(of, t, id, oe);:}
+fielddecl ::= FINAL type:t ID:id optionalexpr:oe SEMI
+    {:RESULT = new ExpressionFielddecl(true, t, id, oe);:}
     |
-    type:t ID:id LEFT_BRKT INTLIT:il RT_BRKT
-    {:RESULT = new ArrayFielddecl(t, id, il):}
+    type:t ID:id optionalexpr:oe SEMI
+    {:RESULT = new ExpressionFielddecl(false, t, id, oe);:}
+    |
+    type:t ID:id LEFT_BRKT INTLIT:il RT_BRKT SEMI
+    {:RESULT = new ArrayFielddecl(t, id, il);:}
     ;
 
-methoddecl ::= returntype:rt ID:id LEFT_PAREN argdecls:a RT_PAREN LEFT_BRACE fielddecls:f statements:ss RT_BRACE optionalsemi:os
-    {:RESULT = new Methoddecl(rt, id, a, f, ss, os);:}
+methoddecl ::= type:t ID:id LEFT_PAREN argdecls:a RT_PAREN LEFT_BRACE fielddecls:f statements:ss RT_BRACE optionalsemi:os
+    {:RESULT = new Methoddecl(t, id, a, f, ss, os);:}
+    |
+    VOID ID:id LEFT_PAREN argdecls:a RT_PAREN LEFT_BRACE fielddecls:f statements:ss RT_BRACE optionalsemi:os
+    {:RESULT = new Methoddecl(null, id, a, f, ss, os);:}
     ;
 
 argdecls ::= argdeclslist:a
@@ -182,6 +212,9 @@ statement ::= IF LEFT_PAREN expression:e RT_PAREN LEFT_BRACE fielddecls:f statem
     |
     LEFT_BRACE fielddecls:f statements:ss RT_BRACE optionalsemi:o
     {:RESULT = new BodyStatement(f, ss, o);:}
+    |
+    INLINECOMMENT:ic
+    {:RESULT = new CommentStatement(ic);:}
     ;
 
 ifend ::= ELSE LEFT_BRACE fielddecls:f statements:ss RT_BRACE
@@ -256,6 +289,9 @@ expression ::= name:n
     |
     NOT expression:e
     {:RESULT = new NotExpression(e);:}
+    |
+    ASSMNT expression:e
+    {:RESULT = new EqualExpression(e);:}
     |
     MINUS expression:e
     {:RESULT = new NegateExpression(e);:}%prec PREFIXMINUS

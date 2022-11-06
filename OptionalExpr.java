@@ -6,6 +6,8 @@ public class OptionalExpr extends Token {
         this.expression = expression;
     }
 
+    public boolean populated () { return expression != null; }
+
     public String toString(int t) {
         return expression == null ? "" : expression.toString(t);
     }

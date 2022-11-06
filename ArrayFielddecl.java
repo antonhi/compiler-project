@@ -12,7 +12,7 @@ public class ArrayFielddecl extends Fielddecl {
 
     @Override
     public String toString(int t) {
-        return getTabs(t) + type.toString(0) + " " + id + " [" + number + "];\n";
+        return getTabs(t) + type.toString(0) + " " + id + "[" + number + "];\n";
     }
     
 }

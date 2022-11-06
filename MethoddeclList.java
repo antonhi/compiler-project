@@ -14,6 +14,8 @@ public class MethoddeclList extends Token {
         return this;
     }
 
+    public boolean isEmpty() { return methoddecls.isEmpty(); }
+
     @Override
     public String toString(int t) {
         String result = "";

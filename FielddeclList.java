@@ -14,6 +14,8 @@ public class FielddeclList extends Token {
         return this;
     }
 
+    public boolean isEmpty() { return fielddeclList.isEmpty(); }
+
     @Override
     public String toString(int t) {
         String result = "";

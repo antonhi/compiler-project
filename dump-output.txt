@@ -1,0 +1,2813 @@
+Warning : *** Shift/Reduce conflict found in state #10
+  between returntype ::= type (*) 
+  and     memberdecls ::= type (*) ID LEFT_BRKT INTLIT RT_BRKT SEMI memberdecls 
+  and     memberdecls ::= type (*) ID optionalexpr SEMI memberdecls 
+  under symbol ID
+  Resolved in favor of shifting.
+
+Warning : *** Production "optionalfinal ::= " never reduced
+Warning : *** Production "optionalfinal ::= FINAL " never reduced
+Warning : *** Production "returntype ::= type " never reduced
+Warning : *** Production "methoddecl ::= returntype ID LEFT_PAREN argdecls RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE optionalsemi " never reduced
+Warning : *** Production "fielddecl ::= type ID LEFT_BRKT INTLIT RT_BRKT SEMI " never reduced
+Warning : *** Production "fielddecl ::= type ID optionalexpr SEMI " never reduced
+Warning : *** Production "fielddecl ::= FINAL type ID optionalexpr SEMI " never reduced
+Warning : *** Production "methoddecls ::= " never reduced
+Warning : *** Production "methoddecls ::= returntype ID LEFT_PAREN argdecls RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE optionalsemi methoddecls " never reduced
+Error : *** More conflicts encountered than expected -- parser generation aborted
+===== Terminals =====
+[0]EOF [1]error [2]CLASS [3]AND [4]ELSE 
+[5]IF [6]WHILE [7]READ [8]PRINT [9]PRINTLN 
+[10]RETURN [11]OR [12]TIMES [13]PLUS [14]PLUSPLUS 
+[15]MINUS [16]MINUSMINUS [17]PREFIXPLUS [18]PREFIXMINUS [19]DIVIDE 
+[20]SEMI [21]LEFT_PAREN [22]RT_PAREN [23]LEFT_BRACE [24]RT_BRACE 
+[25]LEFT_BRKT [26]RT_BRKT [27]EQ [28]GTR [29]LESS 
+[30]LESS_EQ [31]GTR_EQ [32]NOT_EQ [33]NOT [34]CONDITION 
+[35]COLON [36]ASSMNT [37]COMMA [38]FINAL [39]VOID 
+[40]TRUE [41]FALSE [42]INT [43]FLOAT [44]BOOL 
+[45]CHAR [46]ID [47]INTLIT [48]FLOATLIT [49]CHARLIT 
+[50]STRINGLIT 
+
+===== Non terminals =====
+[0]program [1]memberdecls [2]fielddecls [3]methoddecls [4]fielddecl 
+[5]methoddecl [6]argdecls [7]argdeclslist [8]argdecl [9]statement 
+[10]statements [11]ifend [12]expression [13]name [14]readlist 
+[15]printlist [16]printlinelist [17]args [18]returntype [19]type 
+[20]binaryop [21]optionalsemi [22]optionalfinal [23]optionalexpr 
+
+===== Productions =====
+[0] program ::= CLASS ID LEFT_BRACE memberdecls RT_BRACE 
+[1] $START ::= program EOF 
+[2] memberdecls ::= FINAL type ID optionalexpr SEMI memberdecls 
+[3] memberdecls ::= type ID optionalexpr SEMI memberdecls 
+[4] memberdecls ::= type ID LEFT_BRKT INTLIT RT_BRKT SEMI memberdecls 
+[5] memberdecls ::= returntype ID LEFT_PAREN argdecls RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE optionalsemi memberdecls 
+[6] memberdecls ::= 
+[7] fielddecls ::= FINAL type ID optionalexpr SEMI fielddecls 
+[8] fielddecls ::= type ID optionalexpr SEMI fielddecls 
+[9] fielddecls ::= type ID LEFT_BRKT INTLIT RT_BRKT SEMI fielddecls 
+[10] fielddecls ::= 
+[11] methoddecls ::= returntype ID LEFT_PAREN argdecls RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE optionalsemi methoddecls 
+[12] methoddecls ::= 
+[13] fielddecl ::= FINAL type ID optionalexpr SEMI 
+[14] fielddecl ::= type ID optionalexpr SEMI 
+[15] fielddecl ::= type ID LEFT_BRKT INTLIT RT_BRKT SEMI 
+[16] methoddecl ::= returntype ID LEFT_PAREN argdecls RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE optionalsemi 
+[17] argdecls ::= argdeclslist 
+[18] argdecls ::= 
+[19] argdeclslist ::= argdecl COMMA argdeclslist 
+[20] argdeclslist ::= argdecl 
+[21] argdecl ::= type ID LEFT_BRKT RT_BRKT 
+[22] argdecl ::= type ID 
+[23] statements ::= statement statements 
+[24] statements ::= 
+[25] statement ::= IF LEFT_PAREN expression RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE ifend 
+[26] statement ::= WHILE LEFT_PAREN expression RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE 
+[27] statement ::= name ASSMNT expression SEMI 
+[28] statement ::= READ LEFT_PAREN readlist RT_PAREN SEMI 
+[29] statement ::= PRINT LEFT_PAREN printlist RT_PAREN SEMI 
+[30] statement ::= PRINTLN LEFT_PAREN printlinelist RT_PAREN SEMI 
+[31] statement ::= ID LEFT_PAREN RT_PAREN SEMI 
+[32] statement ::= ID LEFT_PAREN args RT_PAREN SEMI 
+[33] statement ::= RETURN SEMI 
+[34] statement ::= RETURN expression SEMI 
+[35] statement ::= name PLUSPLUS SEMI 
+[36] statement ::= name MINUSMINUS SEMI 
+[37] statement ::= LEFT_BRACE fielddecls statements RT_BRACE optionalsemi 
+[38] ifend ::= ELSE LEFT_BRACE fielddecls statements RT_BRACE 
+[39] ifend ::= 
+[40] name ::= ID LEFT_BRKT expression RT_BRKT 
+[41] name ::= ID 
+[42] args ::= expression COMMA args 
+[43] args ::= expression 
+[44] readlist ::= name COMMA readlist 
+[45] readlist ::= name 
+[46] printlist ::= expression COMMA printlist 
+[47] printlist ::= expression 
+[48] printlinelist ::= printlist 
+[49] printlinelist ::= 
+[50] expression ::= name 
+[51] expression ::= ID LEFT_PAREN RT_PAREN 
+[52] expression ::= ID LEFT_PAREN args RT_PAREN 
+[53] expression ::= INTLIT 
+[54] expression ::= CHARLIT 
+[55] expression ::= STRINGLIT 
+[56] expression ::= FLOATLIT 
+[57] expression ::= TRUE 
+[58] expression ::= FALSE 
+[59] expression ::= LEFT_PAREN expression RT_PAREN 
+[60] expression ::= NOT expression 
+[61] expression ::= MINUS expression 
+[62] expression ::= PLUS expression 
+[63] expression ::= LEFT_PAREN type RT_PAREN expression 
+[64] expression ::= expression binaryop expression 
+[65] expression ::= LEFT_PAREN expression CONDITION expression COLON expression RT_PAREN 
+[66] binaryop ::= TIMES 
+[67] binaryop ::= DIVIDE 
+[68] binaryop ::= PLUS 
+[69] binaryop ::= MINUS 
+[70] binaryop ::= LESS 
+[71] binaryop ::= GTR 
+[72] binaryop ::= LESS_EQ 
+[73] binaryop ::= GTR_EQ 
+[74] binaryop ::= EQ 
+[75] binaryop ::= NOT_EQ 
+[76] binaryop ::= OR 
+[77] binaryop ::= AND 
+[78] type ::= INT 
+[79] type ::= CHAR 
+[80] type ::= BOOL 
+[81] type ::= FLOAT 
+[82] returntype ::= type 
+[83] returntype ::= VOID 
+[84] optionalsemi ::= SEMI 
+[85] optionalsemi ::= 
+[86] optionalfinal ::= FINAL 
+[87] optionalfinal ::= 
+[88] optionalexpr ::= expression 
+[89] optionalexpr ::= 
+
+===== Viable Prefix Recognizer =====
+START lalr_state [0]: {
+  [$START ::= (*) program EOF , {EOF }]
+  [program ::= (*) CLASS ID LEFT_BRACE memberdecls RT_BRACE , {EOF }]
+}
+transition on CLASS to state [2]
+transition on program to state [1]
+
+-------------------
+lalr_state [1]: {
+  [$START ::= program (*) EOF , {EOF }]
+}
+transition on EOF to state [185]
+
+-------------------
+lalr_state [2]: {
+  [program ::= CLASS (*) ID LEFT_BRACE memberdecls RT_BRACE , {EOF }]
+}
+transition on ID to state [3]
+
+-------------------
+lalr_state [3]: {
+  [program ::= CLASS ID (*) LEFT_BRACE memberdecls RT_BRACE , {EOF }]
+}
+transition on LEFT_BRACE to state [4]
+
+-------------------
+lalr_state [4]: {
+  [returntype ::= (*) VOID , {ID }]
+  [type ::= (*) BOOL , {ID }]
+  [memberdecls ::= (*) returntype ID LEFT_PAREN argdecls RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE optionalsemi memberdecls , {RT_BRACE }]
+  [memberdecls ::= (*) FINAL type ID optionalexpr SEMI memberdecls , {RT_BRACE }]
+  [returntype ::= (*) type , {ID }]
+  [type ::= (*) CHAR , {ID }]
+  [memberdecls ::= (*) type ID LEFT_BRKT INTLIT RT_BRKT SEMI memberdecls , {RT_BRACE }]
+  [type ::= (*) FLOAT , {ID }]
+  [type ::= (*) INT , {ID }]
+  [program ::= CLASS ID LEFT_BRACE (*) memberdecls RT_BRACE , {EOF }]
+  [memberdecls ::= (*) , {RT_BRACE }]
+  [memberdecls ::= (*) type ID optionalexpr SEMI memberdecls , {RT_BRACE }]
+}
+transition on FLOAT to state [13]
+transition on CHAR to state [12]
+transition on FINAL to state [11]
+transition on type to state [10]
+transition on VOID to state [9]
+transition on returntype to state [8]
+transition on BOOL to state [7]
+transition on memberdecls to state [6]
+transition on INT to state [5]
+
+-------------------
+lalr_state [5]: {
+  [type ::= INT (*) , {RT_PAREN ID }]
+}
+
+-------------------
+lalr_state [6]: {
+  [program ::= CLASS ID LEFT_BRACE memberdecls (*) RT_BRACE , {EOF }]
+}
+transition on RT_BRACE to state [184]
+
+-------------------
+lalr_state [7]: {
+  [type ::= BOOL (*) , {RT_PAREN ID }]
+}
+
+-------------------
+lalr_state [8]: {
+  [memberdecls ::= returntype (*) ID LEFT_PAREN argdecls RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE optionalsemi memberdecls , {RT_BRACE }]
+}
+transition on ID to state [78]
+
+-------------------
+lalr_state [9]: {
+  [returntype ::= VOID (*) , {ID }]
+}
+
+-------------------
+lalr_state [10]: {
+  [returntype ::= type (*) , {ID }]
+  [memberdecls ::= type (*) ID LEFT_BRKT INTLIT RT_BRKT SEMI memberdecls , {RT_BRACE }]
+  [memberdecls ::= type (*) ID optionalexpr SEMI memberdecls , {RT_BRACE }]
+}
+transition on ID to state [69]
+
+-------------------
+lalr_state [11]: {
+  [memberdecls ::= FINAL (*) type ID optionalexpr SEMI memberdecls , {RT_BRACE }]
+  [type ::= (*) CHAR , {ID }]
+  [type ::= (*) FLOAT , {ID }]
+  [type ::= (*) INT , {ID }]
+  [type ::= (*) BOOL , {ID }]
+}
+transition on INT to state [5]
+transition on CHAR to state [12]
+transition on FLOAT to state [13]
+transition on BOOL to state [7]
+transition on type to state [14]
+
+-------------------
+lalr_state [12]: {
+  [type ::= CHAR (*) , {RT_PAREN ID }]
+}
+
+-------------------
+lalr_state [13]: {
+  [type ::= FLOAT (*) , {RT_PAREN ID }]
+}
+
+-------------------
+lalr_state [14]: {
+  [memberdecls ::= FINAL type (*) ID optionalexpr SEMI memberdecls , {RT_BRACE }]
+}
+transition on ID to state [15]
+
+-------------------
+lalr_state [15]: {
+  [expression ::= (*) ID LEFT_PAREN args RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) TRUE , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) PLUS expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) name , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) STRINGLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) NOT expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) LEFT_PAREN expression CONDITION expression COLON expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) INTLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) FALSE , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) LEFT_PAREN type RT_PAREN expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [name ::= (*) ID , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [optionalexpr ::= (*) expression , {SEMI }]
+  [expression ::= (*) ID LEFT_PAREN RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) FLOATLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) MINUS expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [memberdecls ::= FINAL type ID (*) optionalexpr SEMI memberdecls , {RT_BRACE }]
+  [expression ::= (*) CHARLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) LEFT_PAREN expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) expression binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [optionalexpr ::= (*) , {SEMI }]
+}
+transition on STRINGLIT to state [29]
+transition on optionalexpr to state [28]
+transition on NOT to state [27]
+transition on FLOATLIT to state [26]
+transition on CHARLIT to state [25]
+transition on ID to state [24]
+transition on LEFT_PAREN to state [23]
+transition on expression to state [22]
+transition on FALSE to state [21]
+transition on PLUS to state [20]
+transition on TRUE to state [19]
+transition on INTLIT to state [18]
+transition on name to state [17]
+transition on MINUS to state [16]
+
+-------------------
+lalr_state [16]: {
+  [expression ::= (*) ID LEFT_PAREN args RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) TRUE , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) PLUS expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) name , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) STRINGLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) NOT expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) LEFT_PAREN expression CONDITION expression COLON expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) INTLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) FALSE , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) LEFT_PAREN type RT_PAREN expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [name ::= (*) ID , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) ID LEFT_PAREN RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= MINUS (*) expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) FLOATLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) MINUS expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) CHARLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) LEFT_PAREN expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) expression binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+}
+transition on STRINGLIT to state [29]
+transition on NOT to state [27]
+transition on FLOATLIT to state [26]
+transition on CHARLIT to state [25]
+transition on ID to state [24]
+transition on LEFT_PAREN to state [23]
+transition on expression to state [68]
+transition on FALSE to state [21]
+transition on PLUS to state [20]
+transition on TRUE to state [19]
+transition on INTLIT to state [18]
+transition on name to state [17]
+transition on MINUS to state [16]
+
+-------------------
+lalr_state [17]: {
+  [expression ::= name (*) , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+}
+
+-------------------
+lalr_state [18]: {
+  [expression ::= INTLIT (*) , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+}
+
+-------------------
+lalr_state [19]: {
+  [expression ::= TRUE (*) , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+}
+
+-------------------
+lalr_state [20]: {
+  [expression ::= (*) ID LEFT_PAREN args RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= PLUS (*) expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) TRUE , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) PLUS expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) name , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) STRINGLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) NOT expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) LEFT_PAREN expression CONDITION expression COLON expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) INTLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) FALSE , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) LEFT_PAREN type RT_PAREN expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [name ::= (*) ID , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) ID LEFT_PAREN RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) FLOATLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) MINUS expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) CHARLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) LEFT_PAREN expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) expression binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+}
+transition on STRINGLIT to state [29]
+transition on NOT to state [27]
+transition on FLOATLIT to state [26]
+transition on CHARLIT to state [25]
+transition on ID to state [24]
+transition on LEFT_PAREN to state [23]
+transition on expression to state [67]
+transition on FALSE to state [21]
+transition on PLUS to state [20]
+transition on TRUE to state [19]
+transition on INTLIT to state [18]
+transition on name to state [17]
+transition on MINUS to state [16]
+
+-------------------
+lalr_state [21]: {
+  [expression ::= FALSE (*) , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+}
+
+-------------------
+lalr_state [22]: {
+  [binaryop ::= (*) TIMES , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) AND , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) PLUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [optionalexpr ::= expression (*) , {SEMI }]
+  [binaryop ::= (*) OR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) LESS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [expression ::= expression (*) binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [binaryop ::= (*) DIVIDE , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) NOT_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) LESS_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) MINUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+}
+transition on OR to state [45]
+transition on TIMES to state [44]
+transition on binaryop to state [43]
+transition on LESS to state [42]
+transition on GTR to state [41]
+transition on LESS_EQ to state [40]
+transition on EQ to state [39]
+transition on PLUS to state [38]
+transition on NOT_EQ to state [37]
+transition on DIVIDE to state [36]
+transition on AND to state [35]
+transition on GTR_EQ to state [34]
+transition on MINUS to state [33]
+
+-------------------
+lalr_state [23]: {
+  [expression ::= (*) ID LEFT_PAREN args RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION }]
+  [expression ::= (*) TRUE , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION }]
+  [expression ::= (*) PLUS expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION }]
+  [expression ::= (*) name , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION }]
+  [expression ::= (*) STRINGLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION }]
+  [expression ::= LEFT_PAREN (*) expression CONDITION expression COLON expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) NOT expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION }]
+  [expression ::= (*) LEFT_PAREN expression CONDITION expression COLON expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION }]
+  [type ::= (*) BOOL , {RT_PAREN }]
+  [expression ::= (*) INTLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION }]
+  [expression ::= (*) FALSE , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION }]
+  [expression ::= LEFT_PAREN (*) type RT_PAREN expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) LEFT_PAREN type RT_PAREN expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION }]
+  [type ::= (*) INT , {RT_PAREN }]
+  [name ::= (*) ID , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION }]
+  [expression ::= (*) ID LEFT_PAREN RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION }]
+  [expression ::= (*) FLOATLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION }]
+  [expression ::= (*) MINUS expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION }]
+  [type ::= (*) FLOAT , {RT_PAREN }]
+  [expression ::= LEFT_PAREN (*) expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) CHARLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION }]
+  [expression ::= (*) LEFT_PAREN expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION }]
+  [expression ::= (*) expression binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION }]
+  [type ::= (*) CHAR , {RT_PAREN }]
+}
+transition on name to state [17]
+transition on BOOL to state [7]
+transition on MINUS to state [16]
+transition on FALSE to state [21]
+transition on STRINGLIT to state [29]
+transition on expression to state [58]
+transition on FLOAT to state [13]
+transition on INTLIT to state [18]
+transition on ID to state [24]
+transition on TRUE to state [19]
+transition on FLOATLIT to state [26]
+transition on CHARLIT to state [25]
+transition on NOT to state [27]
+transition on type to state [57]
+transition on CHAR to state [12]
+transition on INT to state [5]
+transition on LEFT_PAREN to state [23]
+transition on PLUS to state [20]
+
+-------------------
+lalr_state [24]: {
+  [expression ::= ID (*) LEFT_PAREN RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [name ::= ID (*) LEFT_BRKT expression RT_BRKT , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [name ::= ID (*) , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= ID (*) LEFT_PAREN args RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+}
+transition on LEFT_PAREN to state [48]
+transition on LEFT_BRKT to state [47]
+
+-------------------
+lalr_state [25]: {
+  [expression ::= CHARLIT (*) , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+}
+
+-------------------
+lalr_state [26]: {
+  [expression ::= FLOATLIT (*) , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+}
+
+-------------------
+lalr_state [27]: {
+  [expression ::= (*) ID LEFT_PAREN args RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) TRUE , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) PLUS expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) name , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) STRINGLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= NOT (*) expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) NOT expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) LEFT_PAREN expression CONDITION expression COLON expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) INTLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) FALSE , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) LEFT_PAREN type RT_PAREN expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [name ::= (*) ID , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) ID LEFT_PAREN RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) FLOATLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) MINUS expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) CHARLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) LEFT_PAREN expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) expression binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+}
+transition on STRINGLIT to state [29]
+transition on NOT to state [27]
+transition on FLOATLIT to state [26]
+transition on CHARLIT to state [25]
+transition on ID to state [24]
+transition on LEFT_PAREN to state [23]
+transition on expression to state [32]
+transition on FALSE to state [21]
+transition on PLUS to state [20]
+transition on TRUE to state [19]
+transition on INTLIT to state [18]
+transition on name to state [17]
+transition on MINUS to state [16]
+
+-------------------
+lalr_state [28]: {
+  [memberdecls ::= FINAL type ID optionalexpr (*) SEMI memberdecls , {RT_BRACE }]
+}
+transition on SEMI to state [30]
+
+-------------------
+lalr_state [29]: {
+  [expression ::= STRINGLIT (*) , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+}
+
+-------------------
+lalr_state [30]: {
+  [memberdecls ::= FINAL type ID optionalexpr SEMI (*) memberdecls , {RT_BRACE }]
+  [returntype ::= (*) VOID , {ID }]
+  [type ::= (*) BOOL , {ID }]
+  [memberdecls ::= (*) returntype ID LEFT_PAREN argdecls RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE optionalsemi memberdecls , {RT_BRACE }]
+  [memberdecls ::= (*) FINAL type ID optionalexpr SEMI memberdecls , {RT_BRACE }]
+  [returntype ::= (*) type , {ID }]
+  [type ::= (*) CHAR , {ID }]
+  [memberdecls ::= (*) type ID LEFT_BRKT INTLIT RT_BRKT SEMI memberdecls , {RT_BRACE }]
+  [type ::= (*) FLOAT , {ID }]
+  [type ::= (*) INT , {ID }]
+  [memberdecls ::= (*) , {RT_BRACE }]
+  [memberdecls ::= (*) type ID optionalexpr SEMI memberdecls , {RT_BRACE }]
+}
+transition on FLOAT to state [13]
+transition on CHAR to state [12]
+transition on FINAL to state [11]
+transition on type to state [10]
+transition on VOID to state [9]
+transition on returntype to state [8]
+transition on memberdecls to state [31]
+transition on BOOL to state [7]
+transition on INT to state [5]
+
+-------------------
+lalr_state [31]: {
+  [memberdecls ::= FINAL type ID optionalexpr SEMI memberdecls (*) , {RT_BRACE }]
+}
+
+-------------------
+lalr_state [32]: {
+  [binaryop ::= (*) TIMES , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [expression ::= NOT expression (*) , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [binaryop ::= (*) AND , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) PLUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) OR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) LESS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [expression ::= expression (*) binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [binaryop ::= (*) DIVIDE , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) NOT_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) LESS_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) MINUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+}
+transition on OR to state [45]
+transition on TIMES to state [44]
+transition on binaryop to state [43]
+transition on LESS to state [42]
+transition on GTR to state [41]
+transition on LESS_EQ to state [40]
+transition on EQ to state [39]
+transition on PLUS to state [38]
+transition on NOT_EQ to state [37]
+transition on DIVIDE to state [36]
+transition on AND to state [35]
+transition on GTR_EQ to state [34]
+transition on MINUS to state [33]
+
+-------------------
+lalr_state [33]: {
+  [binaryop ::= MINUS (*) , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+}
+
+-------------------
+lalr_state [34]: {
+  [binaryop ::= GTR_EQ (*) , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+}
+
+-------------------
+lalr_state [35]: {
+  [binaryop ::= AND (*) , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+}
+
+-------------------
+lalr_state [36]: {
+  [binaryop ::= DIVIDE (*) , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+}
+
+-------------------
+lalr_state [37]: {
+  [binaryop ::= NOT_EQ (*) , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+}
+
+-------------------
+lalr_state [38]: {
+  [binaryop ::= PLUS (*) , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+}
+
+-------------------
+lalr_state [39]: {
+  [binaryop ::= EQ (*) , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+}
+
+-------------------
+lalr_state [40]: {
+  [binaryop ::= LESS_EQ (*) , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+}
+
+-------------------
+lalr_state [41]: {
+  [binaryop ::= GTR (*) , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+}
+
+-------------------
+lalr_state [42]: {
+  [binaryop ::= LESS (*) , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+}
+
+-------------------
+lalr_state [43]: {
+  [expression ::= (*) ID LEFT_PAREN args RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) TRUE , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) PLUS expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) name , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) STRINGLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) NOT expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) LEFT_PAREN expression CONDITION expression COLON expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) INTLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) FALSE , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) LEFT_PAREN type RT_PAREN expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [name ::= (*) ID , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) ID LEFT_PAREN RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) FLOATLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) MINUS expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= expression binaryop (*) expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) CHARLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) LEFT_PAREN expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) expression binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+}
+transition on STRINGLIT to state [29]
+transition on NOT to state [27]
+transition on FLOATLIT to state [26]
+transition on CHARLIT to state [25]
+transition on ID to state [24]
+transition on LEFT_PAREN to state [23]
+transition on expression to state [46]
+transition on FALSE to state [21]
+transition on PLUS to state [20]
+transition on TRUE to state [19]
+transition on INTLIT to state [18]
+transition on name to state [17]
+transition on MINUS to state [16]
+
+-------------------
+lalr_state [44]: {
+  [binaryop ::= TIMES (*) , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+}
+
+-------------------
+lalr_state [45]: {
+  [binaryop ::= OR (*) , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+}
+
+-------------------
+lalr_state [46]: {
+  [binaryop ::= (*) TIMES , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) AND , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) PLUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) OR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [expression ::= expression binaryop expression (*) , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [binaryop ::= (*) LESS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [expression ::= expression (*) binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [binaryop ::= (*) DIVIDE , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) NOT_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) LESS_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) MINUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+}
+transition on OR to state [45]
+transition on TIMES to state [44]
+transition on binaryop to state [43]
+transition on LESS to state [42]
+transition on GTR to state [41]
+transition on LESS_EQ to state [40]
+transition on EQ to state [39]
+transition on PLUS to state [38]
+transition on NOT_EQ to state [37]
+transition on DIVIDE to state [36]
+transition on AND to state [35]
+transition on GTR_EQ to state [34]
+transition on MINUS to state [33]
+
+-------------------
+lalr_state [47]: {
+  [expression ::= (*) ID LEFT_PAREN args RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) TRUE , {AND OR TIMES PLUS MINUS DIVIDE RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) PLUS expression , {AND OR TIMES PLUS MINUS DIVIDE RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [name ::= ID LEFT_BRKT (*) expression RT_BRKT , {AND OR TIMES PLUS PLUSPLUS MINUS MINUSMINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON ASSMNT COMMA }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {AND OR TIMES PLUS MINUS DIVIDE RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) name , {AND OR TIMES PLUS MINUS DIVIDE RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) STRINGLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) NOT expression , {AND OR TIMES PLUS MINUS DIVIDE RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) LEFT_PAREN expression CONDITION expression COLON expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) INTLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) FALSE , {AND OR TIMES PLUS MINUS DIVIDE RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) LEFT_PAREN type RT_PAREN expression , {AND OR TIMES PLUS MINUS DIVIDE RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [name ::= (*) ID , {AND OR TIMES PLUS MINUS DIVIDE RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) ID LEFT_PAREN RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) FLOATLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) MINUS expression , {AND OR TIMES PLUS MINUS DIVIDE RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) CHARLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) LEFT_PAREN expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) expression binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+}
+transition on STRINGLIT to state [29]
+transition on NOT to state [27]
+transition on FLOATLIT to state [26]
+transition on CHARLIT to state [25]
+transition on ID to state [24]
+transition on LEFT_PAREN to state [23]
+transition on expression to state [55]
+transition on FALSE to state [21]
+transition on PLUS to state [20]
+transition on TRUE to state [19]
+transition on INTLIT to state [18]
+transition on name to state [17]
+transition on MINUS to state [16]
+
+-------------------
+lalr_state [48]: {
+  [expression ::= (*) ID LEFT_PAREN args RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) TRUE , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) PLUS expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) name , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) STRINGLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) NOT expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) LEFT_PAREN expression CONDITION expression COLON expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [args ::= (*) expression , {RT_PAREN }]
+  [expression ::= (*) INTLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) FALSE , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) LEFT_PAREN type RT_PAREN expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [name ::= (*) ID , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= ID LEFT_PAREN (*) RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) ID LEFT_PAREN RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) FLOATLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) MINUS expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) CHARLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) LEFT_PAREN expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) expression binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= ID LEFT_PAREN (*) args RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [args ::= (*) expression COMMA args , {RT_PAREN }]
+}
+transition on STRINGLIT to state [29]
+transition on NOT to state [27]
+transition on FLOATLIT to state [26]
+transition on CHARLIT to state [25]
+transition on ID to state [24]
+transition on LEFT_PAREN to state [23]
+transition on expression to state [51]
+transition on args to state [50]
+transition on FALSE to state [21]
+transition on PLUS to state [20]
+transition on RT_PAREN to state [49]
+transition on TRUE to state [19]
+transition on INTLIT to state [18]
+transition on name to state [17]
+transition on MINUS to state [16]
+
+-------------------
+lalr_state [49]: {
+  [expression ::= ID LEFT_PAREN RT_PAREN (*) , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+}
+
+-------------------
+lalr_state [50]: {
+  [expression ::= ID LEFT_PAREN args (*) RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+}
+transition on RT_PAREN to state [54]
+
+-------------------
+lalr_state [51]: {
+  [binaryop ::= (*) TIMES , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) AND , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) PLUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [args ::= expression (*) COMMA args , {RT_PAREN }]
+  [binaryop ::= (*) OR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) LESS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [expression ::= expression (*) binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [binaryop ::= (*) DIVIDE , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) NOT_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) LESS_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) MINUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [args ::= expression (*) , {RT_PAREN }]
+}
+transition on OR to state [45]
+transition on TIMES to state [44]
+transition on binaryop to state [43]
+transition on COMMA to state [52]
+transition on LESS to state [42]
+transition on GTR to state [41]
+transition on LESS_EQ to state [40]
+transition on EQ to state [39]
+transition on PLUS to state [38]
+transition on NOT_EQ to state [37]
+transition on DIVIDE to state [36]
+transition on AND to state [35]
+transition on GTR_EQ to state [34]
+transition on MINUS to state [33]
+
+-------------------
+lalr_state [52]: {
+  [expression ::= (*) ID LEFT_PAREN args RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) TRUE , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) PLUS expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) name , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) STRINGLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) NOT expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) LEFT_PAREN expression CONDITION expression COLON expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [args ::= (*) expression , {RT_PAREN }]
+  [expression ::= (*) INTLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) FALSE , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) LEFT_PAREN type RT_PAREN expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [name ::= (*) ID , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) ID LEFT_PAREN RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) FLOATLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) MINUS expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) CHARLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) LEFT_PAREN expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) expression binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [args ::= expression COMMA (*) args , {RT_PAREN }]
+  [args ::= (*) expression COMMA args , {RT_PAREN }]
+}
+transition on STRINGLIT to state [29]
+transition on NOT to state [27]
+transition on FLOATLIT to state [26]
+transition on CHARLIT to state [25]
+transition on ID to state [24]
+transition on LEFT_PAREN to state [23]
+transition on expression to state [51]
+transition on args to state [53]
+transition on FALSE to state [21]
+transition on PLUS to state [20]
+transition on TRUE to state [19]
+transition on INTLIT to state [18]
+transition on name to state [17]
+transition on MINUS to state [16]
+
+-------------------
+lalr_state [53]: {
+  [args ::= expression COMMA args (*) , {RT_PAREN }]
+}
+
+-------------------
+lalr_state [54]: {
+  [expression ::= ID LEFT_PAREN args RT_PAREN (*) , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+}
+
+-------------------
+lalr_state [55]: {
+  [binaryop ::= (*) TIMES , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) AND , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) PLUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) OR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) LESS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [expression ::= expression (*) binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [binaryop ::= (*) DIVIDE , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) NOT_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) LESS_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [name ::= ID LEFT_BRKT expression (*) RT_BRKT , {AND OR TIMES PLUS PLUSPLUS MINUS MINUSMINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON ASSMNT COMMA }]
+  [binaryop ::= (*) MINUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+}
+transition on OR to state [45]
+transition on RT_BRKT to state [56]
+transition on TIMES to state [44]
+transition on binaryop to state [43]
+transition on LESS to state [42]
+transition on GTR to state [41]
+transition on LESS_EQ to state [40]
+transition on EQ to state [39]
+transition on PLUS to state [38]
+transition on NOT_EQ to state [37]
+transition on DIVIDE to state [36]
+transition on AND to state [35]
+transition on GTR_EQ to state [34]
+transition on MINUS to state [33]
+
+-------------------
+lalr_state [56]: {
+  [name ::= ID LEFT_BRKT expression RT_BRKT (*) , {AND OR TIMES PLUS PLUSPLUS MINUS MINUSMINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON ASSMNT COMMA }]
+}
+
+-------------------
+lalr_state [57]: {
+  [expression ::= LEFT_PAREN type (*) RT_PAREN expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+}
+transition on RT_PAREN to state [65]
+
+-------------------
+lalr_state [58]: {
+  [binaryop ::= (*) TIMES , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) AND , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [expression ::= LEFT_PAREN expression (*) CONDITION expression COLON expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [binaryop ::= (*) PLUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [expression ::= LEFT_PAREN expression (*) RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [binaryop ::= (*) OR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) LESS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [expression ::= expression (*) binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION }]
+  [binaryop ::= (*) DIVIDE , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) NOT_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) LESS_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) MINUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+}
+transition on OR to state [45]
+transition on TIMES to state [44]
+transition on binaryop to state [43]
+transition on LESS to state [42]
+transition on GTR to state [41]
+transition on LESS_EQ to state [40]
+transition on CONDITION to state [60]
+transition on EQ to state [39]
+transition on PLUS to state [38]
+transition on RT_PAREN to state [59]
+transition on NOT_EQ to state [37]
+transition on DIVIDE to state [36]
+transition on AND to state [35]
+transition on GTR_EQ to state [34]
+transition on MINUS to state [33]
+
+-------------------
+lalr_state [59]: {
+  [expression ::= LEFT_PAREN expression RT_PAREN (*) , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+}
+
+-------------------
+lalr_state [60]: {
+  [expression ::= (*) ID LEFT_PAREN args RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COLON }]
+  [expression ::= (*) TRUE , {AND OR TIMES PLUS MINUS DIVIDE EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COLON }]
+  [expression ::= (*) PLUS expression , {AND OR TIMES PLUS MINUS DIVIDE EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COLON }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {AND OR TIMES PLUS MINUS DIVIDE EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COLON }]
+  [expression ::= (*) name , {AND OR TIMES PLUS MINUS DIVIDE EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COLON }]
+  [expression ::= LEFT_PAREN expression CONDITION (*) expression COLON expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) STRINGLIT , {AND OR TIMES PLUS MINUS DIVIDE EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COLON }]
+  [expression ::= (*) NOT expression , {AND OR TIMES PLUS MINUS DIVIDE EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COLON }]
+  [expression ::= (*) LEFT_PAREN expression CONDITION expression COLON expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COLON }]
+  [expression ::= (*) INTLIT , {AND OR TIMES PLUS MINUS DIVIDE EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COLON }]
+  [expression ::= (*) FALSE , {AND OR TIMES PLUS MINUS DIVIDE EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COLON }]
+  [expression ::= (*) LEFT_PAREN type RT_PAREN expression , {AND OR TIMES PLUS MINUS DIVIDE EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COLON }]
+  [name ::= (*) ID , {AND OR TIMES PLUS MINUS DIVIDE EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COLON }]
+  [expression ::= (*) ID LEFT_PAREN RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COLON }]
+  [expression ::= (*) FLOATLIT , {AND OR TIMES PLUS MINUS DIVIDE EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COLON }]
+  [expression ::= (*) MINUS expression , {AND OR TIMES PLUS MINUS DIVIDE EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COLON }]
+  [expression ::= (*) CHARLIT , {AND OR TIMES PLUS MINUS DIVIDE EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COLON }]
+  [expression ::= (*) LEFT_PAREN expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COLON }]
+  [expression ::= (*) expression binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COLON }]
+}
+transition on STRINGLIT to state [29]
+transition on NOT to state [27]
+transition on FLOATLIT to state [26]
+transition on CHARLIT to state [25]
+transition on ID to state [24]
+transition on LEFT_PAREN to state [23]
+transition on expression to state [61]
+transition on FALSE to state [21]
+transition on PLUS to state [20]
+transition on TRUE to state [19]
+transition on INTLIT to state [18]
+transition on name to state [17]
+transition on MINUS to state [16]
+
+-------------------
+lalr_state [61]: {
+  [binaryop ::= (*) TIMES , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [expression ::= LEFT_PAREN expression CONDITION expression (*) COLON expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [binaryop ::= (*) AND , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) PLUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) OR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) LESS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [expression ::= expression (*) binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COLON }]
+  [binaryop ::= (*) DIVIDE , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) NOT_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) LESS_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) MINUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+}
+transition on OR to state [45]
+transition on TIMES to state [44]
+transition on binaryop to state [43]
+transition on LESS to state [42]
+transition on GTR to state [41]
+transition on LESS_EQ to state [40]
+transition on EQ to state [39]
+transition on PLUS to state [38]
+transition on NOT_EQ to state [37]
+transition on COLON to state [62]
+transition on DIVIDE to state [36]
+transition on AND to state [35]
+transition on GTR_EQ to state [34]
+transition on MINUS to state [33]
+
+-------------------
+lalr_state [62]: {
+  [expression ::= (*) ID LEFT_PAREN args RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) TRUE , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) PLUS expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= LEFT_PAREN expression CONDITION expression COLON (*) expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) name , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) STRINGLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) NOT expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) LEFT_PAREN expression CONDITION expression COLON expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) INTLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) FALSE , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) LEFT_PAREN type RT_PAREN expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [name ::= (*) ID , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) ID LEFT_PAREN RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) FLOATLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) MINUS expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) CHARLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) LEFT_PAREN expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) expression binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+}
+transition on STRINGLIT to state [29]
+transition on NOT to state [27]
+transition on FLOATLIT to state [26]
+transition on CHARLIT to state [25]
+transition on ID to state [24]
+transition on LEFT_PAREN to state [23]
+transition on expression to state [63]
+transition on FALSE to state [21]
+transition on PLUS to state [20]
+transition on TRUE to state [19]
+transition on INTLIT to state [18]
+transition on name to state [17]
+transition on MINUS to state [16]
+
+-------------------
+lalr_state [63]: {
+  [binaryop ::= (*) TIMES , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [expression ::= LEFT_PAREN expression CONDITION expression COLON expression (*) RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [binaryop ::= (*) AND , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) PLUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) OR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) LESS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [expression ::= expression (*) binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [binaryop ::= (*) DIVIDE , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) NOT_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) LESS_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) MINUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+}
+transition on OR to state [45]
+transition on TIMES to state [44]
+transition on binaryop to state [43]
+transition on LESS to state [42]
+transition on GTR to state [41]
+transition on LESS_EQ to state [40]
+transition on EQ to state [39]
+transition on PLUS to state [38]
+transition on RT_PAREN to state [64]
+transition on NOT_EQ to state [37]
+transition on DIVIDE to state [36]
+transition on AND to state [35]
+transition on GTR_EQ to state [34]
+transition on MINUS to state [33]
+
+-------------------
+lalr_state [64]: {
+  [expression ::= LEFT_PAREN expression CONDITION expression COLON expression RT_PAREN (*) , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+}
+
+-------------------
+lalr_state [65]: {
+  [expression ::= (*) ID LEFT_PAREN args RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) TRUE , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) PLUS expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) name , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) STRINGLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) NOT expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) LEFT_PAREN expression CONDITION expression COLON expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= LEFT_PAREN type RT_PAREN (*) expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) INTLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) FALSE , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) LEFT_PAREN type RT_PAREN expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [name ::= (*) ID , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) ID LEFT_PAREN RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) FLOATLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) MINUS expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) CHARLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) LEFT_PAREN expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= (*) expression binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+}
+transition on STRINGLIT to state [29]
+transition on NOT to state [27]
+transition on FLOATLIT to state [26]
+transition on CHARLIT to state [25]
+transition on ID to state [24]
+transition on LEFT_PAREN to state [23]
+transition on expression to state [66]
+transition on FALSE to state [21]
+transition on PLUS to state [20]
+transition on TRUE to state [19]
+transition on INTLIT to state [18]
+transition on name to state [17]
+transition on MINUS to state [16]
+
+-------------------
+lalr_state [66]: {
+  [binaryop ::= (*) TIMES , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) AND , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) PLUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) OR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) LESS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [expression ::= expression (*) binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [binaryop ::= (*) DIVIDE , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) NOT_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [expression ::= LEFT_PAREN type RT_PAREN expression (*) , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [binaryop ::= (*) LESS_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) MINUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+}
+transition on OR to state [45]
+transition on TIMES to state [44]
+transition on binaryop to state [43]
+transition on LESS to state [42]
+transition on GTR to state [41]
+transition on LESS_EQ to state [40]
+transition on EQ to state [39]
+transition on PLUS to state [38]
+transition on NOT_EQ to state [37]
+transition on DIVIDE to state [36]
+transition on AND to state [35]
+transition on GTR_EQ to state [34]
+transition on MINUS to state [33]
+
+-------------------
+lalr_state [67]: {
+  [binaryop ::= (*) TIMES , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) AND , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) PLUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [expression ::= PLUS expression (*) , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [binaryop ::= (*) OR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) LESS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [expression ::= expression (*) binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [binaryop ::= (*) DIVIDE , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) NOT_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) LESS_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) MINUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+}
+transition on OR to state [45]
+transition on TIMES to state [44]
+transition on binaryop to state [43]
+transition on LESS to state [42]
+transition on GTR to state [41]
+transition on LESS_EQ to state [40]
+transition on EQ to state [39]
+transition on PLUS to state [38]
+transition on NOT_EQ to state [37]
+transition on DIVIDE to state [36]
+transition on AND to state [35]
+transition on GTR_EQ to state [34]
+transition on MINUS to state [33]
+
+-------------------
+lalr_state [68]: {
+  [binaryop ::= (*) TIMES , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) AND , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) PLUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) OR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) LESS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [expression ::= MINUS expression (*) , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [expression ::= expression (*) binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI RT_PAREN RT_BRKT EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ CONDITION COLON COMMA }]
+  [binaryop ::= (*) DIVIDE , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) NOT_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) LESS_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) MINUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+}
+transition on OR to state [45]
+transition on TIMES to state [44]
+transition on binaryop to state [43]
+transition on LESS to state [42]
+transition on GTR to state [41]
+transition on LESS_EQ to state [40]
+transition on EQ to state [39]
+transition on PLUS to state [38]
+transition on NOT_EQ to state [37]
+transition on DIVIDE to state [36]
+transition on AND to state [35]
+transition on GTR_EQ to state [34]
+transition on MINUS to state [33]
+
+-------------------
+lalr_state [69]: {
+  [expression ::= (*) ID LEFT_PAREN args RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) TRUE , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) PLUS expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [memberdecls ::= type ID (*) optionalexpr SEMI memberdecls , {RT_BRACE }]
+  [expression ::= (*) name , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) STRINGLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) NOT expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) LEFT_PAREN expression CONDITION expression COLON expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) INTLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) FALSE , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) LEFT_PAREN type RT_PAREN expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [name ::= (*) ID , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [memberdecls ::= type ID (*) LEFT_BRKT INTLIT RT_BRKT SEMI memberdecls , {RT_BRACE }]
+  [optionalexpr ::= (*) expression , {SEMI }]
+  [expression ::= (*) ID LEFT_PAREN RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) FLOATLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) MINUS expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) CHARLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) LEFT_PAREN expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) expression binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [optionalexpr ::= (*) , {SEMI }]
+}
+transition on STRINGLIT to state [29]
+transition on LEFT_BRKT to state [71]
+transition on optionalexpr to state [70]
+transition on NOT to state [27]
+transition on FLOATLIT to state [26]
+transition on CHARLIT to state [25]
+transition on ID to state [24]
+transition on LEFT_PAREN to state [23]
+transition on expression to state [22]
+transition on FALSE to state [21]
+transition on PLUS to state [20]
+transition on TRUE to state [19]
+transition on INTLIT to state [18]
+transition on name to state [17]
+transition on MINUS to state [16]
+
+-------------------
+lalr_state [70]: {
+  [memberdecls ::= type ID optionalexpr (*) SEMI memberdecls , {RT_BRACE }]
+}
+transition on SEMI to state [76]
+
+-------------------
+lalr_state [71]: {
+  [memberdecls ::= type ID LEFT_BRKT (*) INTLIT RT_BRKT SEMI memberdecls , {RT_BRACE }]
+}
+transition on INTLIT to state [72]
+
+-------------------
+lalr_state [72]: {
+  [memberdecls ::= type ID LEFT_BRKT INTLIT (*) RT_BRKT SEMI memberdecls , {RT_BRACE }]
+}
+transition on RT_BRKT to state [73]
+
+-------------------
+lalr_state [73]: {
+  [memberdecls ::= type ID LEFT_BRKT INTLIT RT_BRKT (*) SEMI memberdecls , {RT_BRACE }]
+}
+transition on SEMI to state [74]
+
+-------------------
+lalr_state [74]: {
+  [returntype ::= (*) VOID , {ID }]
+  [type ::= (*) BOOL , {ID }]
+  [memberdecls ::= (*) returntype ID LEFT_PAREN argdecls RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE optionalsemi memberdecls , {RT_BRACE }]
+  [memberdecls ::= (*) FINAL type ID optionalexpr SEMI memberdecls , {RT_BRACE }]
+  [memberdecls ::= type ID LEFT_BRKT INTLIT RT_BRKT SEMI (*) memberdecls , {RT_BRACE }]
+  [returntype ::= (*) type , {ID }]
+  [type ::= (*) CHAR , {ID }]
+  [memberdecls ::= (*) type ID LEFT_BRKT INTLIT RT_BRKT SEMI memberdecls , {RT_BRACE }]
+  [type ::= (*) FLOAT , {ID }]
+  [type ::= (*) INT , {ID }]
+  [memberdecls ::= (*) , {RT_BRACE }]
+  [memberdecls ::= (*) type ID optionalexpr SEMI memberdecls , {RT_BRACE }]
+}
+transition on FLOAT to state [13]
+transition on CHAR to state [12]
+transition on FINAL to state [11]
+transition on type to state [10]
+transition on VOID to state [9]
+transition on returntype to state [8]
+transition on memberdecls to state [75]
+transition on BOOL to state [7]
+transition on INT to state [5]
+
+-------------------
+lalr_state [75]: {
+  [memberdecls ::= type ID LEFT_BRKT INTLIT RT_BRKT SEMI memberdecls (*) , {RT_BRACE }]
+}
+
+-------------------
+lalr_state [76]: {
+  [returntype ::= (*) VOID , {ID }]
+  [type ::= (*) BOOL , {ID }]
+  [memberdecls ::= (*) returntype ID LEFT_PAREN argdecls RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE optionalsemi memberdecls , {RT_BRACE }]
+  [memberdecls ::= (*) FINAL type ID optionalexpr SEMI memberdecls , {RT_BRACE }]
+  [returntype ::= (*) type , {ID }]
+  [type ::= (*) CHAR , {ID }]
+  [memberdecls ::= (*) type ID LEFT_BRKT INTLIT RT_BRKT SEMI memberdecls , {RT_BRACE }]
+  [memberdecls ::= type ID optionalexpr SEMI (*) memberdecls , {RT_BRACE }]
+  [type ::= (*) FLOAT , {ID }]
+  [type ::= (*) INT , {ID }]
+  [memberdecls ::= (*) , {RT_BRACE }]
+  [memberdecls ::= (*) type ID optionalexpr SEMI memberdecls , {RT_BRACE }]
+}
+transition on FLOAT to state [13]
+transition on CHAR to state [12]
+transition on FINAL to state [11]
+transition on type to state [10]
+transition on VOID to state [9]
+transition on returntype to state [8]
+transition on memberdecls to state [77]
+transition on BOOL to state [7]
+transition on INT to state [5]
+
+-------------------
+lalr_state [77]: {
+  [memberdecls ::= type ID optionalexpr SEMI memberdecls (*) , {RT_BRACE }]
+}
+
+-------------------
+lalr_state [78]: {
+  [memberdecls ::= returntype ID (*) LEFT_PAREN argdecls RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE optionalsemi memberdecls , {RT_BRACE }]
+}
+transition on LEFT_PAREN to state [79]
+
+-------------------
+lalr_state [79]: {
+  [argdeclslist ::= (*) argdecl , {RT_PAREN }]
+  [argdecls ::= (*) argdeclslist , {RT_PAREN }]
+  [memberdecls ::= returntype ID LEFT_PAREN (*) argdecls RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE optionalsemi memberdecls , {RT_BRACE }]
+  [type ::= (*) BOOL , {ID }]
+  [argdecl ::= (*) type ID , {RT_PAREN COMMA }]
+  [argdeclslist ::= (*) argdecl COMMA argdeclslist , {RT_PAREN }]
+  [type ::= (*) CHAR , {ID }]
+  [argdecl ::= (*) type ID LEFT_BRKT RT_BRKT , {RT_PAREN COMMA }]
+  [argdecls ::= (*) , {RT_PAREN }]
+  [type ::= (*) FLOAT , {ID }]
+  [type ::= (*) INT , {ID }]
+}
+transition on argdecls to state [83]
+transition on INT to state [5]
+transition on CHAR to state [12]
+transition on FLOAT to state [13]
+transition on BOOL to state [7]
+transition on type to state [82]
+transition on argdecl to state [81]
+transition on argdeclslist to state [80]
+
+-------------------
+lalr_state [80]: {
+  [argdecls ::= argdeclslist (*) , {RT_PAREN }]
+}
+
+-------------------
+lalr_state [81]: {
+  [argdeclslist ::= argdecl (*) , {RT_PAREN }]
+  [argdeclslist ::= argdecl (*) COMMA argdeclslist , {RT_PAREN }]
+}
+transition on COMMA to state [182]
+
+-------------------
+lalr_state [82]: {
+  [argdecl ::= type (*) ID LEFT_BRKT RT_BRKT , {RT_PAREN COMMA }]
+  [argdecl ::= type (*) ID , {RT_PAREN COMMA }]
+}
+transition on ID to state [179]
+
+-------------------
+lalr_state [83]: {
+  [memberdecls ::= returntype ID LEFT_PAREN argdecls (*) RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE optionalsemi memberdecls , {RT_BRACE }]
+}
+transition on RT_PAREN to state [84]
+
+-------------------
+lalr_state [84]: {
+  [memberdecls ::= returntype ID LEFT_PAREN argdecls RT_PAREN (*) LEFT_BRACE fielddecls statements RT_BRACE optionalsemi memberdecls , {RT_BRACE }]
+}
+transition on LEFT_BRACE to state [85]
+
+-------------------
+lalr_state [85]: {
+  [type ::= (*) BOOL , {ID }]
+  [fielddecls ::= (*) type ID optionalexpr SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [fielddecls ::= (*) , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [type ::= (*) CHAR , {ID }]
+  [fielddecls ::= (*) FINAL type ID optionalexpr SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [type ::= (*) FLOAT , {ID }]
+  [type ::= (*) INT , {ID }]
+  [fielddecls ::= (*) type ID LEFT_BRKT INTLIT RT_BRKT SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [memberdecls ::= returntype ID LEFT_PAREN argdecls RT_PAREN LEFT_BRACE (*) fielddecls statements RT_BRACE optionalsemi memberdecls , {RT_BRACE }]
+}
+transition on INT to state [5]
+transition on CHAR to state [12]
+transition on FLOAT to state [13]
+transition on FINAL to state [88]
+transition on BOOL to state [7]
+transition on fielddecls to state [87]
+transition on type to state [86]
+
+-------------------
+lalr_state [86]: {
+  [fielddecls ::= type (*) ID LEFT_BRKT INTLIT RT_BRKT SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [fielddecls ::= type (*) ID optionalexpr SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on ID to state [170]
+
+-------------------
+lalr_state [87]: {
+  [statement ::= (*) IF LEFT_PAREN expression RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE ifend , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) PRINTLN LEFT_PAREN printlinelist RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) name PLUSPLUS SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {PLUSPLUS MINUSMINUS ASSMNT }]
+  [statements ::= (*) statement statements , {RT_BRACE }]
+  [statement ::= (*) READ LEFT_PAREN readlist RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) RETURN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) WHILE LEFT_PAREN expression RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) ID LEFT_PAREN RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) name MINUSMINUS SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [name ::= (*) ID , {PLUSPLUS MINUSMINUS ASSMNT }]
+  [statements ::= (*) , {RT_BRACE }]
+  [statement ::= (*) PRINT LEFT_PAREN printlist RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) RETURN expression SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [memberdecls ::= returntype ID LEFT_PAREN argdecls RT_PAREN LEFT_BRACE fielddecls (*) statements RT_BRACE optionalsemi memberdecls , {RT_BRACE }]
+  [statement ::= (*) name ASSMNT expression SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) ID LEFT_PAREN args RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) LEFT_BRACE fielddecls statements RT_BRACE optionalsemi , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on RETURN to state [104]
+transition on LEFT_BRACE to state [103]
+transition on PRINT to state [102]
+transition on statement to state [101]
+transition on ID to state [100]
+transition on IF to state [99]
+transition on statements to state [98]
+transition on PRINTLN to state [97]
+transition on name to state [96]
+transition on WHILE to state [95]
+transition on READ to state [94]
+
+-------------------
+lalr_state [88]: {
+  [type ::= (*) CHAR , {ID }]
+  [fielddecls ::= FINAL (*) type ID optionalexpr SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [type ::= (*) FLOAT , {ID }]
+  [type ::= (*) INT , {ID }]
+  [type ::= (*) BOOL , {ID }]
+}
+transition on INT to state [5]
+transition on CHAR to state [12]
+transition on FLOAT to state [13]
+transition on BOOL to state [7]
+transition on type to state [89]
+
+-------------------
+lalr_state [89]: {
+  [fielddecls ::= FINAL type (*) ID optionalexpr SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on ID to state [90]
+
+-------------------
+lalr_state [90]: {
+  [expression ::= (*) ID LEFT_PAREN args RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) TRUE , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) PLUS expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) name , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) STRINGLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) NOT expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) LEFT_PAREN expression CONDITION expression COLON expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) INTLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) FALSE , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) LEFT_PAREN type RT_PAREN expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [name ::= (*) ID , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [optionalexpr ::= (*) expression , {SEMI }]
+  [expression ::= (*) ID LEFT_PAREN RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) FLOATLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) MINUS expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [fielddecls ::= FINAL type ID (*) optionalexpr SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [expression ::= (*) CHARLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) LEFT_PAREN expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) expression binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [optionalexpr ::= (*) , {SEMI }]
+}
+transition on STRINGLIT to state [29]
+transition on optionalexpr to state [91]
+transition on NOT to state [27]
+transition on FLOATLIT to state [26]
+transition on CHARLIT to state [25]
+transition on ID to state [24]
+transition on LEFT_PAREN to state [23]
+transition on expression to state [22]
+transition on FALSE to state [21]
+transition on PLUS to state [20]
+transition on TRUE to state [19]
+transition on INTLIT to state [18]
+transition on name to state [17]
+transition on MINUS to state [16]
+
+-------------------
+lalr_state [91]: {
+  [fielddecls ::= FINAL type ID optionalexpr (*) SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on SEMI to state [92]
+
+-------------------
+lalr_state [92]: {
+  [type ::= (*) BOOL , {ID }]
+  [fielddecls ::= (*) type ID optionalexpr SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [fielddecls ::= FINAL type ID optionalexpr SEMI (*) fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [fielddecls ::= (*) , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [type ::= (*) CHAR , {ID }]
+  [fielddecls ::= (*) FINAL type ID optionalexpr SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [type ::= (*) FLOAT , {ID }]
+  [type ::= (*) INT , {ID }]
+  [fielddecls ::= (*) type ID LEFT_BRKT INTLIT RT_BRKT SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on INT to state [5]
+transition on CHAR to state [12]
+transition on FLOAT to state [13]
+transition on FINAL to state [88]
+transition on BOOL to state [7]
+transition on fielddecls to state [93]
+transition on type to state [86]
+
+-------------------
+lalr_state [93]: {
+  [fielddecls ::= FINAL type ID optionalexpr SEMI fielddecls (*) , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+
+-------------------
+lalr_state [94]: {
+  [statement ::= READ (*) LEFT_PAREN readlist RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on LEFT_PAREN to state [162]
+
+-------------------
+lalr_state [95]: {
+  [statement ::= WHILE (*) LEFT_PAREN expression RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on LEFT_PAREN to state [155]
+
+-------------------
+lalr_state [96]: {
+  [statement ::= name (*) ASSMNT expression SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= name (*) PLUSPLUS SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= name (*) MINUSMINUS SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on PLUSPLUS to state [150]
+transition on MINUSMINUS to state [149]
+transition on ASSMNT to state [148]
+
+-------------------
+lalr_state [97]: {
+  [statement ::= PRINTLN (*) LEFT_PAREN printlinelist RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on LEFT_PAREN to state [143]
+
+-------------------
+lalr_state [98]: {
+  [memberdecls ::= returntype ID LEFT_PAREN argdecls RT_PAREN LEFT_BRACE fielddecls statements (*) RT_BRACE optionalsemi memberdecls , {RT_BRACE }]
+}
+transition on RT_BRACE to state [140]
+
+-------------------
+lalr_state [99]: {
+  [statement ::= IF (*) LEFT_PAREN expression RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE ifend , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on LEFT_PAREN to state [127]
+
+-------------------
+lalr_state [100]: {
+  [statement ::= ID (*) LEFT_PAREN args RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [name ::= ID (*) LEFT_BRKT expression RT_BRKT , {PLUSPLUS MINUSMINUS ASSMNT }]
+  [statement ::= ID (*) LEFT_PAREN RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [name ::= ID (*) , {PLUSPLUS MINUSMINUS ASSMNT }]
+}
+transition on LEFT_PAREN to state [121]
+transition on LEFT_BRKT to state [47]
+
+-------------------
+lalr_state [101]: {
+  [statement ::= (*) IF LEFT_PAREN expression RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE ifend , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) PRINTLN LEFT_PAREN printlinelist RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) name PLUSPLUS SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {PLUSPLUS MINUSMINUS ASSMNT }]
+  [statements ::= statement (*) statements , {RT_BRACE }]
+  [statements ::= (*) statement statements , {RT_BRACE }]
+  [statement ::= (*) READ LEFT_PAREN readlist RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) RETURN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) WHILE LEFT_PAREN expression RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) ID LEFT_PAREN RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) name MINUSMINUS SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [name ::= (*) ID , {PLUSPLUS MINUSMINUS ASSMNT }]
+  [statements ::= (*) , {RT_BRACE }]
+  [statement ::= (*) PRINT LEFT_PAREN printlist RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) RETURN expression SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) name ASSMNT expression SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) ID LEFT_PAREN args RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) LEFT_BRACE fielddecls statements RT_BRACE optionalsemi , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on RETURN to state [104]
+transition on LEFT_BRACE to state [103]
+transition on PRINT to state [102]
+transition on statement to state [101]
+transition on ID to state [100]
+transition on statements to state [120]
+transition on IF to state [99]
+transition on PRINTLN to state [97]
+transition on name to state [96]
+transition on WHILE to state [95]
+transition on READ to state [94]
+
+-------------------
+lalr_state [102]: {
+  [statement ::= PRINT (*) LEFT_PAREN printlist RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on LEFT_PAREN to state [113]
+
+-------------------
+lalr_state [103]: {
+  [statement ::= LEFT_BRACE (*) fielddecls statements RT_BRACE optionalsemi , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [type ::= (*) BOOL , {ID }]
+  [fielddecls ::= (*) type ID optionalexpr SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [fielddecls ::= (*) , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [type ::= (*) CHAR , {ID }]
+  [fielddecls ::= (*) FINAL type ID optionalexpr SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [type ::= (*) FLOAT , {ID }]
+  [type ::= (*) INT , {ID }]
+  [fielddecls ::= (*) type ID LEFT_BRKT INTLIT RT_BRKT SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on INT to state [5]
+transition on CHAR to state [12]
+transition on FLOAT to state [13]
+transition on FINAL to state [88]
+transition on BOOL to state [7]
+transition on fielddecls to state [108]
+transition on type to state [86]
+
+-------------------
+lalr_state [104]: {
+  [expression ::= (*) ID LEFT_PAREN args RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) TRUE , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) PLUS expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) name , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) STRINGLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) NOT expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) LEFT_PAREN expression CONDITION expression COLON expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [statement ::= RETURN (*) SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [expression ::= (*) INTLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) FALSE , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) LEFT_PAREN type RT_PAREN expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [name ::= (*) ID , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) ID LEFT_PAREN RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) FLOATLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) MINUS expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [statement ::= RETURN (*) expression SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [expression ::= (*) CHARLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) LEFT_PAREN expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) expression binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+}
+transition on STRINGLIT to state [29]
+transition on NOT to state [27]
+transition on FLOATLIT to state [26]
+transition on CHARLIT to state [25]
+transition on ID to state [24]
+transition on LEFT_PAREN to state [23]
+transition on expression to state [106]
+transition on FALSE to state [21]
+transition on PLUS to state [20]
+transition on SEMI to state [105]
+transition on TRUE to state [19]
+transition on INTLIT to state [18]
+transition on name to state [17]
+transition on MINUS to state [16]
+
+-------------------
+lalr_state [105]: {
+  [statement ::= RETURN SEMI (*) , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+
+-------------------
+lalr_state [106]: {
+  [binaryop ::= (*) TIMES , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [statement ::= RETURN expression (*) SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [binaryop ::= (*) AND , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) PLUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) OR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) LESS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [expression ::= expression (*) binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [binaryop ::= (*) DIVIDE , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) NOT_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) LESS_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) MINUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+}
+transition on OR to state [45]
+transition on TIMES to state [44]
+transition on binaryop to state [43]
+transition on LESS to state [42]
+transition on GTR to state [41]
+transition on LESS_EQ to state [40]
+transition on EQ to state [39]
+transition on PLUS to state [38]
+transition on SEMI to state [107]
+transition on NOT_EQ to state [37]
+transition on DIVIDE to state [36]
+transition on AND to state [35]
+transition on GTR_EQ to state [34]
+transition on MINUS to state [33]
+
+-------------------
+lalr_state [107]: {
+  [statement ::= RETURN expression SEMI (*) , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+
+-------------------
+lalr_state [108]: {
+  [statement ::= (*) IF LEFT_PAREN expression RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE ifend , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) PRINTLN LEFT_PAREN printlinelist RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) name PLUSPLUS SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {PLUSPLUS MINUSMINUS ASSMNT }]
+  [statements ::= (*) statement statements , {RT_BRACE }]
+  [statement ::= (*) READ LEFT_PAREN readlist RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) RETURN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) WHILE LEFT_PAREN expression RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) ID LEFT_PAREN RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) name MINUSMINUS SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [name ::= (*) ID , {PLUSPLUS MINUSMINUS ASSMNT }]
+  [statements ::= (*) , {RT_BRACE }]
+  [statement ::= (*) PRINT LEFT_PAREN printlist RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) RETURN expression SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) name ASSMNT expression SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= LEFT_BRACE fielddecls (*) statements RT_BRACE optionalsemi , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) ID LEFT_PAREN args RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) LEFT_BRACE fielddecls statements RT_BRACE optionalsemi , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on RETURN to state [104]
+transition on LEFT_BRACE to state [103]
+transition on PRINT to state [102]
+transition on statement to state [101]
+transition on ID to state [100]
+transition on IF to state [99]
+transition on statements to state [109]
+transition on PRINTLN to state [97]
+transition on name to state [96]
+transition on WHILE to state [95]
+transition on READ to state [94]
+
+-------------------
+lalr_state [109]: {
+  [statement ::= LEFT_BRACE fielddecls statements (*) RT_BRACE optionalsemi , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on RT_BRACE to state [110]
+
+-------------------
+lalr_state [110]: {
+  [optionalsemi ::= (*) , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= LEFT_BRACE fielddecls statements RT_BRACE (*) optionalsemi , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [optionalsemi ::= (*) SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on SEMI to state [112]
+transition on optionalsemi to state [111]
+
+-------------------
+lalr_state [111]: {
+  [statement ::= LEFT_BRACE fielddecls statements RT_BRACE optionalsemi (*) , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+
+-------------------
+lalr_state [112]: {
+  [optionalsemi ::= SEMI (*) , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE FINAL VOID INT FLOAT BOOL CHAR ID }]
+}
+
+-------------------
+lalr_state [113]: {
+  [expression ::= (*) ID LEFT_PAREN args RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) TRUE , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) PLUS expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) name , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) STRINGLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) NOT expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) LEFT_PAREN expression CONDITION expression COLON expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) INTLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) FALSE , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) LEFT_PAREN type RT_PAREN expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [name ::= (*) ID , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [printlist ::= (*) expression COMMA printlist , {RT_PAREN }]
+  [expression ::= (*) ID LEFT_PAREN RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) FLOATLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) MINUS expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [statement ::= PRINT LEFT_PAREN (*) printlist RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [expression ::= (*) CHARLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) LEFT_PAREN expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) expression binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [printlist ::= (*) expression , {RT_PAREN }]
+}
+transition on STRINGLIT to state [29]
+transition on NOT to state [27]
+transition on FLOATLIT to state [26]
+transition on CHARLIT to state [25]
+transition on ID to state [24]
+transition on LEFT_PAREN to state [23]
+transition on expression to state [115]
+transition on FALSE to state [21]
+transition on PLUS to state [20]
+transition on TRUE to state [19]
+transition on printlist to state [114]
+transition on INTLIT to state [18]
+transition on name to state [17]
+transition on MINUS to state [16]
+
+-------------------
+lalr_state [114]: {
+  [statement ::= PRINT LEFT_PAREN printlist (*) RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on RT_PAREN to state [118]
+
+-------------------
+lalr_state [115]: {
+  [binaryop ::= (*) TIMES , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) AND , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) PLUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) OR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [printlist ::= expression (*) , {RT_PAREN }]
+  [binaryop ::= (*) LESS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [expression ::= expression (*) binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [binaryop ::= (*) DIVIDE , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) NOT_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) LESS_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [printlist ::= expression (*) COMMA printlist , {RT_PAREN }]
+  [binaryop ::= (*) MINUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+}
+transition on OR to state [45]
+transition on TIMES to state [44]
+transition on binaryop to state [43]
+transition on LESS to state [42]
+transition on COMMA to state [116]
+transition on GTR to state [41]
+transition on LESS_EQ to state [40]
+transition on EQ to state [39]
+transition on PLUS to state [38]
+transition on NOT_EQ to state [37]
+transition on DIVIDE to state [36]
+transition on AND to state [35]
+transition on GTR_EQ to state [34]
+transition on MINUS to state [33]
+
+-------------------
+lalr_state [116]: {
+  [expression ::= (*) ID LEFT_PAREN args RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) TRUE , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) PLUS expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) name , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) STRINGLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) NOT expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) LEFT_PAREN expression CONDITION expression COLON expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) INTLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) FALSE , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) LEFT_PAREN type RT_PAREN expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [printlist ::= expression COMMA (*) printlist , {RT_PAREN }]
+  [name ::= (*) ID , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [printlist ::= (*) expression COMMA printlist , {RT_PAREN }]
+  [expression ::= (*) ID LEFT_PAREN RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) FLOATLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) MINUS expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) CHARLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) LEFT_PAREN expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) expression binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [printlist ::= (*) expression , {RT_PAREN }]
+}
+transition on STRINGLIT to state [29]
+transition on NOT to state [27]
+transition on FLOATLIT to state [26]
+transition on CHARLIT to state [25]
+transition on ID to state [24]
+transition on LEFT_PAREN to state [23]
+transition on expression to state [115]
+transition on FALSE to state [21]
+transition on PLUS to state [20]
+transition on TRUE to state [19]
+transition on printlist to state [117]
+transition on INTLIT to state [18]
+transition on name to state [17]
+transition on MINUS to state [16]
+
+-------------------
+lalr_state [117]: {
+  [printlist ::= expression COMMA printlist (*) , {RT_PAREN }]
+}
+
+-------------------
+lalr_state [118]: {
+  [statement ::= PRINT LEFT_PAREN printlist RT_PAREN (*) SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on SEMI to state [119]
+
+-------------------
+lalr_state [119]: {
+  [statement ::= PRINT LEFT_PAREN printlist RT_PAREN SEMI (*) , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+
+-------------------
+lalr_state [120]: {
+  [statements ::= statement statements (*) , {RT_BRACE }]
+}
+
+-------------------
+lalr_state [121]: {
+  [expression ::= (*) ID LEFT_PAREN args RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) TRUE , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) PLUS expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) name , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) STRINGLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) NOT expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) LEFT_PAREN expression CONDITION expression COLON expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [args ::= (*) expression , {RT_PAREN }]
+  [expression ::= (*) INTLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) FALSE , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) LEFT_PAREN type RT_PAREN expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [statement ::= ID LEFT_PAREN (*) RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [name ::= (*) ID , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) ID LEFT_PAREN RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) FLOATLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) MINUS expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) CHARLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) LEFT_PAREN expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) expression binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [statement ::= ID LEFT_PAREN (*) args RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [args ::= (*) expression COMMA args , {RT_PAREN }]
+}
+transition on STRINGLIT to state [29]
+transition on NOT to state [27]
+transition on FLOATLIT to state [26]
+transition on CHARLIT to state [25]
+transition on ID to state [24]
+transition on LEFT_PAREN to state [23]
+transition on expression to state [51]
+transition on args to state [123]
+transition on FALSE to state [21]
+transition on PLUS to state [20]
+transition on RT_PAREN to state [122]
+transition on TRUE to state [19]
+transition on INTLIT to state [18]
+transition on name to state [17]
+transition on MINUS to state [16]
+
+-------------------
+lalr_state [122]: {
+  [statement ::= ID LEFT_PAREN RT_PAREN (*) SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on SEMI to state [126]
+
+-------------------
+lalr_state [123]: {
+  [statement ::= ID LEFT_PAREN args (*) RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on RT_PAREN to state [124]
+
+-------------------
+lalr_state [124]: {
+  [statement ::= ID LEFT_PAREN args RT_PAREN (*) SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on SEMI to state [125]
+
+-------------------
+lalr_state [125]: {
+  [statement ::= ID LEFT_PAREN args RT_PAREN SEMI (*) , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+
+-------------------
+lalr_state [126]: {
+  [statement ::= ID LEFT_PAREN RT_PAREN SEMI (*) , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+
+-------------------
+lalr_state [127]: {
+  [expression ::= (*) ID LEFT_PAREN args RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) TRUE , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) PLUS expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [statement ::= IF LEFT_PAREN (*) expression RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE ifend , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) name , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) STRINGLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) NOT expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) LEFT_PAREN expression CONDITION expression COLON expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) INTLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) FALSE , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) LEFT_PAREN type RT_PAREN expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [name ::= (*) ID , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) ID LEFT_PAREN RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) FLOATLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) MINUS expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) CHARLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) LEFT_PAREN expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) expression binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+}
+transition on STRINGLIT to state [29]
+transition on NOT to state [27]
+transition on FLOATLIT to state [26]
+transition on CHARLIT to state [25]
+transition on ID to state [24]
+transition on LEFT_PAREN to state [23]
+transition on expression to state [128]
+transition on FALSE to state [21]
+transition on PLUS to state [20]
+transition on TRUE to state [19]
+transition on INTLIT to state [18]
+transition on name to state [17]
+transition on MINUS to state [16]
+
+-------------------
+lalr_state [128]: {
+  [binaryop ::= (*) TIMES , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [statement ::= IF LEFT_PAREN expression (*) RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE ifend , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [binaryop ::= (*) AND , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) PLUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) OR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) LESS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [expression ::= expression (*) binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [binaryop ::= (*) DIVIDE , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) NOT_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) LESS_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) MINUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+}
+transition on OR to state [45]
+transition on TIMES to state [44]
+transition on binaryop to state [43]
+transition on LESS to state [42]
+transition on GTR to state [41]
+transition on LESS_EQ to state [40]
+transition on EQ to state [39]
+transition on PLUS to state [38]
+transition on RT_PAREN to state [129]
+transition on NOT_EQ to state [37]
+transition on DIVIDE to state [36]
+transition on AND to state [35]
+transition on GTR_EQ to state [34]
+transition on MINUS to state [33]
+
+-------------------
+lalr_state [129]: {
+  [statement ::= IF LEFT_PAREN expression RT_PAREN (*) LEFT_BRACE fielddecls statements RT_BRACE ifend , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on LEFT_BRACE to state [130]
+
+-------------------
+lalr_state [130]: {
+  [statement ::= IF LEFT_PAREN expression RT_PAREN LEFT_BRACE (*) fielddecls statements RT_BRACE ifend , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [type ::= (*) BOOL , {ID }]
+  [fielddecls ::= (*) type ID optionalexpr SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [fielddecls ::= (*) , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [type ::= (*) CHAR , {ID }]
+  [fielddecls ::= (*) FINAL type ID optionalexpr SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [type ::= (*) FLOAT , {ID }]
+  [type ::= (*) INT , {ID }]
+  [fielddecls ::= (*) type ID LEFT_BRKT INTLIT RT_BRKT SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on INT to state [5]
+transition on CHAR to state [12]
+transition on FLOAT to state [13]
+transition on FINAL to state [88]
+transition on BOOL to state [7]
+transition on fielddecls to state [131]
+transition on type to state [86]
+
+-------------------
+lalr_state [131]: {
+  [statement ::= (*) IF LEFT_PAREN expression RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE ifend , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) PRINTLN LEFT_PAREN printlinelist RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) name PLUSPLUS SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {PLUSPLUS MINUSMINUS ASSMNT }]
+  [statements ::= (*) statement statements , {RT_BRACE }]
+  [statement ::= (*) READ LEFT_PAREN readlist RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) RETURN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) WHILE LEFT_PAREN expression RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) ID LEFT_PAREN RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) name MINUSMINUS SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [name ::= (*) ID , {PLUSPLUS MINUSMINUS ASSMNT }]
+  [statements ::= (*) , {RT_BRACE }]
+  [statement ::= (*) PRINT LEFT_PAREN printlist RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) RETURN expression SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) name ASSMNT expression SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) ID LEFT_PAREN args RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) LEFT_BRACE fielddecls statements RT_BRACE optionalsemi , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= IF LEFT_PAREN expression RT_PAREN LEFT_BRACE fielddecls (*) statements RT_BRACE ifend , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on RETURN to state [104]
+transition on LEFT_BRACE to state [103]
+transition on PRINT to state [102]
+transition on statement to state [101]
+transition on ID to state [100]
+transition on IF to state [99]
+transition on statements to state [132]
+transition on PRINTLN to state [97]
+transition on name to state [96]
+transition on WHILE to state [95]
+transition on READ to state [94]
+
+-------------------
+lalr_state [132]: {
+  [statement ::= IF LEFT_PAREN expression RT_PAREN LEFT_BRACE fielddecls statements (*) RT_BRACE ifend , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on RT_BRACE to state [133]
+
+-------------------
+lalr_state [133]: {
+  [ifend ::= (*) ELSE LEFT_BRACE fielddecls statements RT_BRACE , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= IF LEFT_PAREN expression RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE (*) ifend , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [ifend ::= (*) , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on ifend to state [135]
+transition on ELSE to state [134]
+
+-------------------
+lalr_state [134]: {
+  [ifend ::= ELSE (*) LEFT_BRACE fielddecls statements RT_BRACE , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on LEFT_BRACE to state [136]
+
+-------------------
+lalr_state [135]: {
+  [statement ::= IF LEFT_PAREN expression RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE ifend (*) , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+
+-------------------
+lalr_state [136]: {
+  [type ::= (*) BOOL , {ID }]
+  [fielddecls ::= (*) type ID optionalexpr SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [fielddecls ::= (*) , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [type ::= (*) CHAR , {ID }]
+  [fielddecls ::= (*) FINAL type ID optionalexpr SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [ifend ::= ELSE LEFT_BRACE (*) fielddecls statements RT_BRACE , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [type ::= (*) FLOAT , {ID }]
+  [type ::= (*) INT , {ID }]
+  [fielddecls ::= (*) type ID LEFT_BRKT INTLIT RT_BRKT SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on INT to state [5]
+transition on CHAR to state [12]
+transition on FLOAT to state [13]
+transition on FINAL to state [88]
+transition on BOOL to state [7]
+transition on fielddecls to state [137]
+transition on type to state [86]
+
+-------------------
+lalr_state [137]: {
+  [statement ::= (*) IF LEFT_PAREN expression RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE ifend , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) PRINTLN LEFT_PAREN printlinelist RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) name PLUSPLUS SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {PLUSPLUS MINUSMINUS ASSMNT }]
+  [statements ::= (*) statement statements , {RT_BRACE }]
+  [ifend ::= ELSE LEFT_BRACE fielddecls (*) statements RT_BRACE , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) READ LEFT_PAREN readlist RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) RETURN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) WHILE LEFT_PAREN expression RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) ID LEFT_PAREN RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) name MINUSMINUS SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [name ::= (*) ID , {PLUSPLUS MINUSMINUS ASSMNT }]
+  [statements ::= (*) , {RT_BRACE }]
+  [statement ::= (*) PRINT LEFT_PAREN printlist RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) RETURN expression SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) name ASSMNT expression SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) ID LEFT_PAREN args RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) LEFT_BRACE fielddecls statements RT_BRACE optionalsemi , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on RETURN to state [104]
+transition on LEFT_BRACE to state [103]
+transition on PRINT to state [102]
+transition on statement to state [101]
+transition on ID to state [100]
+transition on statements to state [138]
+transition on IF to state [99]
+transition on PRINTLN to state [97]
+transition on name to state [96]
+transition on WHILE to state [95]
+transition on READ to state [94]
+
+-------------------
+lalr_state [138]: {
+  [ifend ::= ELSE LEFT_BRACE fielddecls statements (*) RT_BRACE , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on RT_BRACE to state [139]
+
+-------------------
+lalr_state [139]: {
+  [ifend ::= ELSE LEFT_BRACE fielddecls statements RT_BRACE (*) , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+
+-------------------
+lalr_state [140]: {
+  [optionalsemi ::= (*) , {RT_BRACE FINAL VOID INT FLOAT BOOL CHAR }]
+  [memberdecls ::= returntype ID LEFT_PAREN argdecls RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE (*) optionalsemi memberdecls , {RT_BRACE }]
+  [optionalsemi ::= (*) SEMI , {RT_BRACE FINAL VOID INT FLOAT BOOL CHAR }]
+}
+transition on SEMI to state [112]
+transition on optionalsemi to state [141]
+
+-------------------
+lalr_state [141]: {
+  [returntype ::= (*) VOID , {ID }]
+  [type ::= (*) BOOL , {ID }]
+  [memberdecls ::= (*) returntype ID LEFT_PAREN argdecls RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE optionalsemi memberdecls , {RT_BRACE }]
+  [memberdecls ::= (*) FINAL type ID optionalexpr SEMI memberdecls , {RT_BRACE }]
+  [returntype ::= (*) type , {ID }]
+  [type ::= (*) CHAR , {ID }]
+  [memberdecls ::= (*) type ID LEFT_BRKT INTLIT RT_BRKT SEMI memberdecls , {RT_BRACE }]
+  [type ::= (*) FLOAT , {ID }]
+  [memberdecls ::= returntype ID LEFT_PAREN argdecls RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE optionalsemi (*) memberdecls , {RT_BRACE }]
+  [type ::= (*) INT , {ID }]
+  [memberdecls ::= (*) , {RT_BRACE }]
+  [memberdecls ::= (*) type ID optionalexpr SEMI memberdecls , {RT_BRACE }]
+}
+transition on FLOAT to state [13]
+transition on CHAR to state [12]
+transition on FINAL to state [11]
+transition on type to state [10]
+transition on VOID to state [9]
+transition on returntype to state [8]
+transition on memberdecls to state [142]
+transition on BOOL to state [7]
+transition on INT to state [5]
+
+-------------------
+lalr_state [142]: {
+  [memberdecls ::= returntype ID LEFT_PAREN argdecls RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE optionalsemi memberdecls (*) , {RT_BRACE }]
+}
+
+-------------------
+lalr_state [143]: {
+  [expression ::= (*) ID LEFT_PAREN args RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) TRUE , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) PLUS expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [statement ::= PRINTLN LEFT_PAREN (*) printlinelist RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) name , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) STRINGLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) NOT expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) LEFT_PAREN expression CONDITION expression COLON expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [printlinelist ::= (*) printlist , {RT_PAREN }]
+  [expression ::= (*) INTLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) FALSE , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) LEFT_PAREN type RT_PAREN expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [name ::= (*) ID , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [printlist ::= (*) expression COMMA printlist , {RT_PAREN }]
+  [expression ::= (*) ID LEFT_PAREN RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) FLOATLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) MINUS expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [printlinelist ::= (*) , {RT_PAREN }]
+  [expression ::= (*) CHARLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) LEFT_PAREN expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [expression ::= (*) expression binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ COMMA }]
+  [printlist ::= (*) expression , {RT_PAREN }]
+}
+transition on STRINGLIT to state [29]
+transition on NOT to state [27]
+transition on FLOATLIT to state [26]
+transition on CHARLIT to state [25]
+transition on ID to state [24]
+transition on LEFT_PAREN to state [23]
+transition on expression to state [115]
+transition on FALSE to state [21]
+transition on printlinelist to state [145]
+transition on PLUS to state [20]
+transition on TRUE to state [19]
+transition on printlist to state [144]
+transition on INTLIT to state [18]
+transition on name to state [17]
+transition on MINUS to state [16]
+
+-------------------
+lalr_state [144]: {
+  [printlinelist ::= printlist (*) , {RT_PAREN }]
+}
+
+-------------------
+lalr_state [145]: {
+  [statement ::= PRINTLN LEFT_PAREN printlinelist (*) RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on RT_PAREN to state [146]
+
+-------------------
+lalr_state [146]: {
+  [statement ::= PRINTLN LEFT_PAREN printlinelist RT_PAREN (*) SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on SEMI to state [147]
+
+-------------------
+lalr_state [147]: {
+  [statement ::= PRINTLN LEFT_PAREN printlinelist RT_PAREN SEMI (*) , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+
+-------------------
+lalr_state [148]: {
+  [expression ::= (*) ID LEFT_PAREN args RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) TRUE , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) PLUS expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) name , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) STRINGLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) NOT expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) LEFT_PAREN expression CONDITION expression COLON expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) INTLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) FALSE , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) LEFT_PAREN type RT_PAREN expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [name ::= (*) ID , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) ID LEFT_PAREN RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) FLOATLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) MINUS expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) CHARLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) LEFT_PAREN expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) expression binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [statement ::= name ASSMNT (*) expression SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on STRINGLIT to state [29]
+transition on NOT to state [27]
+transition on FLOATLIT to state [26]
+transition on CHARLIT to state [25]
+transition on ID to state [24]
+transition on LEFT_PAREN to state [23]
+transition on expression to state [153]
+transition on FALSE to state [21]
+transition on PLUS to state [20]
+transition on TRUE to state [19]
+transition on INTLIT to state [18]
+transition on name to state [17]
+transition on MINUS to state [16]
+
+-------------------
+lalr_state [149]: {
+  [statement ::= name MINUSMINUS (*) SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on SEMI to state [152]
+
+-------------------
+lalr_state [150]: {
+  [statement ::= name PLUSPLUS (*) SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on SEMI to state [151]
+
+-------------------
+lalr_state [151]: {
+  [statement ::= name PLUSPLUS SEMI (*) , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+
+-------------------
+lalr_state [152]: {
+  [statement ::= name MINUSMINUS SEMI (*) , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+
+-------------------
+lalr_state [153]: {
+  [binaryop ::= (*) TIMES , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) AND , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) PLUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [statement ::= name ASSMNT expression (*) SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [binaryop ::= (*) OR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) LESS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [expression ::= expression (*) binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [binaryop ::= (*) DIVIDE , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) NOT_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) LESS_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) MINUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+}
+transition on OR to state [45]
+transition on TIMES to state [44]
+transition on binaryop to state [43]
+transition on LESS to state [42]
+transition on GTR to state [41]
+transition on LESS_EQ to state [40]
+transition on EQ to state [39]
+transition on PLUS to state [38]
+transition on SEMI to state [154]
+transition on NOT_EQ to state [37]
+transition on DIVIDE to state [36]
+transition on AND to state [35]
+transition on GTR_EQ to state [34]
+transition on MINUS to state [33]
+
+-------------------
+lalr_state [154]: {
+  [statement ::= name ASSMNT expression SEMI (*) , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+
+-------------------
+lalr_state [155]: {
+  [expression ::= (*) ID LEFT_PAREN args RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) TRUE , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) PLUS expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) name , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) STRINGLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) NOT expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) LEFT_PAREN expression CONDITION expression COLON expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) INTLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) FALSE , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [statement ::= WHILE LEFT_PAREN (*) expression RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [expression ::= (*) LEFT_PAREN type RT_PAREN expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [name ::= (*) ID , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) ID LEFT_PAREN RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) FLOATLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) MINUS expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) CHARLIT , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) LEFT_PAREN expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) expression binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+}
+transition on STRINGLIT to state [29]
+transition on NOT to state [27]
+transition on FLOATLIT to state [26]
+transition on CHARLIT to state [25]
+transition on ID to state [24]
+transition on LEFT_PAREN to state [23]
+transition on expression to state [156]
+transition on FALSE to state [21]
+transition on PLUS to state [20]
+transition on TRUE to state [19]
+transition on INTLIT to state [18]
+transition on name to state [17]
+transition on MINUS to state [16]
+
+-------------------
+lalr_state [156]: {
+  [binaryop ::= (*) TIMES , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) AND , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) PLUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) OR , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) GTR_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) LESS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [expression ::= expression (*) binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE RT_PAREN EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [binaryop ::= (*) DIVIDE , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [statement ::= WHILE LEFT_PAREN expression (*) RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [binaryop ::= (*) NOT_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) LESS_EQ , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+  [binaryop ::= (*) MINUS , {PLUS MINUS LEFT_PAREN NOT TRUE FALSE ID INTLIT FLOATLIT CHARLIT STRINGLIT }]
+}
+transition on OR to state [45]
+transition on TIMES to state [44]
+transition on binaryop to state [43]
+transition on LESS to state [42]
+transition on GTR to state [41]
+transition on LESS_EQ to state [40]
+transition on EQ to state [39]
+transition on PLUS to state [38]
+transition on RT_PAREN to state [157]
+transition on NOT_EQ to state [37]
+transition on DIVIDE to state [36]
+transition on AND to state [35]
+transition on GTR_EQ to state [34]
+transition on MINUS to state [33]
+
+-------------------
+lalr_state [157]: {
+  [statement ::= WHILE LEFT_PAREN expression RT_PAREN (*) LEFT_BRACE fielddecls statements RT_BRACE , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on LEFT_BRACE to state [158]
+
+-------------------
+lalr_state [158]: {
+  [type ::= (*) BOOL , {ID }]
+  [fielddecls ::= (*) type ID optionalexpr SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [fielddecls ::= (*) , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [type ::= (*) CHAR , {ID }]
+  [fielddecls ::= (*) FINAL type ID optionalexpr SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= WHILE LEFT_PAREN expression RT_PAREN LEFT_BRACE (*) fielddecls statements RT_BRACE , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [type ::= (*) FLOAT , {ID }]
+  [type ::= (*) INT , {ID }]
+  [fielddecls ::= (*) type ID LEFT_BRKT INTLIT RT_BRKT SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on INT to state [5]
+transition on CHAR to state [12]
+transition on FLOAT to state [13]
+transition on FINAL to state [88]
+transition on BOOL to state [7]
+transition on fielddecls to state [159]
+transition on type to state [86]
+
+-------------------
+lalr_state [159]: {
+  [statement ::= (*) IF LEFT_PAREN expression RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE ifend , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) PRINTLN LEFT_PAREN printlinelist RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) name PLUSPLUS SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {PLUSPLUS MINUSMINUS ASSMNT }]
+  [statements ::= (*) statement statements , {RT_BRACE }]
+  [statement ::= (*) READ LEFT_PAREN readlist RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) RETURN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= WHILE LEFT_PAREN expression RT_PAREN LEFT_BRACE fielddecls (*) statements RT_BRACE , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) WHILE LEFT_PAREN expression RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) ID LEFT_PAREN RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) name MINUSMINUS SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [name ::= (*) ID , {PLUSPLUS MINUSMINUS ASSMNT }]
+  [statements ::= (*) , {RT_BRACE }]
+  [statement ::= (*) PRINT LEFT_PAREN printlist RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) RETURN expression SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) name ASSMNT expression SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) ID LEFT_PAREN args RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [statement ::= (*) LEFT_BRACE fielddecls statements RT_BRACE optionalsemi , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on RETURN to state [104]
+transition on LEFT_BRACE to state [103]
+transition on PRINT to state [102]
+transition on statement to state [101]
+transition on ID to state [100]
+transition on statements to state [160]
+transition on IF to state [99]
+transition on PRINTLN to state [97]
+transition on name to state [96]
+transition on WHILE to state [95]
+transition on READ to state [94]
+
+-------------------
+lalr_state [160]: {
+  [statement ::= WHILE LEFT_PAREN expression RT_PAREN LEFT_BRACE fielddecls statements (*) RT_BRACE , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on RT_BRACE to state [161]
+
+-------------------
+lalr_state [161]: {
+  [statement ::= WHILE LEFT_PAREN expression RT_PAREN LEFT_BRACE fielddecls statements RT_BRACE (*) , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+
+-------------------
+lalr_state [162]: {
+  [name ::= (*) ID , {RT_PAREN COMMA }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {RT_PAREN COMMA }]
+  [readlist ::= (*) name , {RT_PAREN }]
+  [statement ::= READ LEFT_PAREN (*) readlist RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [readlist ::= (*) name COMMA readlist , {RT_PAREN }]
+}
+transition on readlist to state [165]
+transition on name to state [164]
+transition on ID to state [163]
+
+-------------------
+lalr_state [163]: {
+  [name ::= ID (*) LEFT_BRKT expression RT_BRKT , {RT_PAREN COMMA }]
+  [name ::= ID (*) , {RT_PAREN COMMA }]
+}
+transition on LEFT_BRKT to state [47]
+
+-------------------
+lalr_state [164]: {
+  [readlist ::= name (*) , {RT_PAREN }]
+  [readlist ::= name (*) COMMA readlist , {RT_PAREN }]
+}
+transition on COMMA to state [168]
+
+-------------------
+lalr_state [165]: {
+  [statement ::= READ LEFT_PAREN readlist (*) RT_PAREN SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on RT_PAREN to state [166]
+
+-------------------
+lalr_state [166]: {
+  [statement ::= READ LEFT_PAREN readlist RT_PAREN (*) SEMI , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on SEMI to state [167]
+
+-------------------
+lalr_state [167]: {
+  [statement ::= READ LEFT_PAREN readlist RT_PAREN SEMI (*) , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+
+-------------------
+lalr_state [168]: {
+  [name ::= (*) ID , {RT_PAREN COMMA }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {RT_PAREN COMMA }]
+  [readlist ::= (*) name , {RT_PAREN }]
+  [readlist ::= name COMMA (*) readlist , {RT_PAREN }]
+  [readlist ::= (*) name COMMA readlist , {RT_PAREN }]
+}
+transition on readlist to state [169]
+transition on name to state [164]
+transition on ID to state [163]
+
+-------------------
+lalr_state [169]: {
+  [readlist ::= name COMMA readlist (*) , {RT_PAREN }]
+}
+
+-------------------
+lalr_state [170]: {
+  [expression ::= (*) ID LEFT_PAREN args RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) TRUE , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) PLUS expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [name ::= (*) ID LEFT_BRKT expression RT_BRKT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [fielddecls ::= type ID (*) optionalexpr SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [expression ::= (*) name , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) STRINGLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) NOT expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) LEFT_PAREN expression CONDITION expression COLON expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) INTLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) FALSE , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) LEFT_PAREN type RT_PAREN expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [name ::= (*) ID , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [optionalexpr ::= (*) expression , {SEMI }]
+  [fielddecls ::= type ID (*) LEFT_BRKT INTLIT RT_BRKT SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [expression ::= (*) ID LEFT_PAREN RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) FLOATLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) MINUS expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) CHARLIT , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) LEFT_PAREN expression RT_PAREN , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [expression ::= (*) expression binaryop expression , {AND OR TIMES PLUS MINUS DIVIDE SEMI EQ GTR LESS LESS_EQ GTR_EQ NOT_EQ }]
+  [optionalexpr ::= (*) , {SEMI }]
+}
+transition on STRINGLIT to state [29]
+transition on LEFT_BRKT to state [172]
+transition on optionalexpr to state [171]
+transition on NOT to state [27]
+transition on FLOATLIT to state [26]
+transition on CHARLIT to state [25]
+transition on ID to state [24]
+transition on LEFT_PAREN to state [23]
+transition on expression to state [22]
+transition on FALSE to state [21]
+transition on PLUS to state [20]
+transition on TRUE to state [19]
+transition on INTLIT to state [18]
+transition on name to state [17]
+transition on MINUS to state [16]
+
+-------------------
+lalr_state [171]: {
+  [fielddecls ::= type ID optionalexpr (*) SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on SEMI to state [177]
+
+-------------------
+lalr_state [172]: {
+  [fielddecls ::= type ID LEFT_BRKT (*) INTLIT RT_BRKT SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on INTLIT to state [173]
+
+-------------------
+lalr_state [173]: {
+  [fielddecls ::= type ID LEFT_BRKT INTLIT (*) RT_BRKT SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on RT_BRKT to state [174]
+
+-------------------
+lalr_state [174]: {
+  [fielddecls ::= type ID LEFT_BRKT INTLIT RT_BRKT (*) SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on SEMI to state [175]
+
+-------------------
+lalr_state [175]: {
+  [type ::= (*) BOOL , {ID }]
+  [fielddecls ::= (*) type ID optionalexpr SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [fielddecls ::= (*) , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [type ::= (*) CHAR , {ID }]
+  [fielddecls ::= (*) FINAL type ID optionalexpr SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [fielddecls ::= type ID LEFT_BRKT INTLIT RT_BRKT SEMI (*) fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [type ::= (*) FLOAT , {ID }]
+  [type ::= (*) INT , {ID }]
+  [fielddecls ::= (*) type ID LEFT_BRKT INTLIT RT_BRKT SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on INT to state [5]
+transition on CHAR to state [12]
+transition on FLOAT to state [13]
+transition on FINAL to state [88]
+transition on BOOL to state [7]
+transition on fielddecls to state [176]
+transition on type to state [86]
+
+-------------------
+lalr_state [176]: {
+  [fielddecls ::= type ID LEFT_BRKT INTLIT RT_BRKT SEMI fielddecls (*) , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+
+-------------------
+lalr_state [177]: {
+  [fielddecls ::= type ID optionalexpr SEMI (*) fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [type ::= (*) BOOL , {ID }]
+  [fielddecls ::= (*) type ID optionalexpr SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [fielddecls ::= (*) , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [type ::= (*) CHAR , {ID }]
+  [fielddecls ::= (*) FINAL type ID optionalexpr SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+  [type ::= (*) FLOAT , {ID }]
+  [type ::= (*) INT , {ID }]
+  [fielddecls ::= (*) type ID LEFT_BRKT INTLIT RT_BRKT SEMI fielddecls , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+transition on INT to state [5]
+transition on CHAR to state [12]
+transition on FLOAT to state [13]
+transition on FINAL to state [88]
+transition on BOOL to state [7]
+transition on fielddecls to state [178]
+transition on type to state [86]
+
+-------------------
+lalr_state [178]: {
+  [fielddecls ::= type ID optionalexpr SEMI fielddecls (*) , {IF WHILE READ PRINT PRINTLN RETURN LEFT_BRACE RT_BRACE ID }]
+}
+
+-------------------
+lalr_state [179]: {
+  [argdecl ::= type ID (*) LEFT_BRKT RT_BRKT , {RT_PAREN COMMA }]
+  [argdecl ::= type ID (*) , {RT_PAREN COMMA }]
+}
+transition on LEFT_BRKT to state [180]
+
+-------------------
+lalr_state [180]: {
+  [argdecl ::= type ID LEFT_BRKT (*) RT_BRKT , {RT_PAREN COMMA }]
+}
+transition on RT_BRKT to state [181]
+
+-------------------
+lalr_state [181]: {
+  [argdecl ::= type ID LEFT_BRKT RT_BRKT (*) , {RT_PAREN COMMA }]
+}
+
+-------------------
+lalr_state [182]: {
+  [argdeclslist ::= (*) argdecl , {RT_PAREN }]
+  [type ::= (*) BOOL , {ID }]
+  [argdeclslist ::= argdecl COMMA (*) argdeclslist , {RT_PAREN }]
+  [argdecl ::= (*) type ID , {RT_PAREN COMMA }]
+  [argdeclslist ::= (*) argdecl COMMA argdeclslist , {RT_PAREN }]
+  [type ::= (*) CHAR , {ID }]
+  [argdecl ::= (*) type ID LEFT_BRKT RT_BRKT , {RT_PAREN COMMA }]
+  [type ::= (*) FLOAT , {ID }]
+  [type ::= (*) INT , {ID }]
+}
+transition on INT to state [5]
+transition on CHAR to state [12]
+transition on FLOAT to state [13]
+transition on BOOL to state [7]
+transition on type to state [82]
+transition on argdecl to state [81]
+transition on argdeclslist to state [183]
+
+-------------------
+lalr_state [183]: {
+  [argdeclslist ::= argdecl COMMA argdeclslist (*) , {RT_PAREN }]
+}
+
+-------------------
+lalr_state [184]: {
+  [program ::= CLASS ID LEFT_BRACE memberdecls RT_BRACE (*) , {EOF }]
+}
+
+-------------------
+lalr_state [185]: {
+  [$START ::= program EOF (*) , {EOF }]
+}
+
+-------------------
+------- CUP v0.11b 20160615 (GIT 4ac7450) Parser Generation Summary -------
+  1 error and 10 warnings
+  51 terminals, 24 non-terminals, and 90 productions declared, 
+  producing 186 unique parse states.
+  0 terminals declared but not used.
+  0 non-terminals declared but not used.
+  0 productions never reduced.
+  1 conflict detected (0 expected).
+  No code produced.
+---------------------------------------------------- (CUP v0.11b 20160615 (GIT 4ac7450))
+make: *** [parserD.java] Error 100

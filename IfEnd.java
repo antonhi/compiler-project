@@ -23,7 +23,7 @@ public class IfEnd extends Token {
             result += fielddecls.toString(t+1);
         }
         if (statementList != null) {
-            if (fielddecls != null) {
+            if (fielddecls != null && !fielddecls.isEmpty()) {
                 result += "\n";
             }
             result += statementList.toString(t+1);
