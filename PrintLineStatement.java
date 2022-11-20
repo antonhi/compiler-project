@@ -10,5 +10,11 @@ public class PrintLineStatement extends Statement {
     public String toString(int t) {
         return getTabs(t) + "printline (" + expressions.toString(0) + ");\n";
     }
+
+    @Override
+    public TypeData typeCheck() throws CompilerException {
+        expressions.typeCheck();
+        return null;
+    }
     
 }

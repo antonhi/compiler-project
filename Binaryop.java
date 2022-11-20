@@ -7,4 +7,9 @@ public class Binaryop extends Token {
     public String toString(int t) {
         return getTabs(t) + value;
     }
+    public String getValue() { return value; }
+    @Override
+    public TypeData typeCheck() throws CompilerException {
+        return null;
+    }
 }

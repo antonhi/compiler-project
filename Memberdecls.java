@@ -22,5 +22,12 @@ public class Memberdecls extends Token {
     public String toString(int t) {
         return fielddeclList.toString(t) + (methoddeclList.isEmpty() ? "" : (fielddeclList.isEmpty() ? "" : "\n") + methoddeclList.toString(t));
     }
+
+    @Override
+    public TypeData typeCheck() throws CompilerException {
+        fielddeclList.typeCheck();
+        methoddeclList.typeCheck();
+        return null;
+    }
     
 }

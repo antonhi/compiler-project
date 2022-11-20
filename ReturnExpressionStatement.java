@@ -10,5 +10,11 @@ public class ReturnExpressionStatement extends Statement {
     public String toString(int t) {
         return getTabs(t) + "return " + expression.toString(0) + ";\n";
     }
+
+    @Override
+    public TypeData typeCheck() throws CompilerException {
+        expression.typeCheck();
+        return null;
+    }
     
 }

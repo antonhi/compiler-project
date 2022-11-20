@@ -10,5 +10,10 @@ public class NameExpression extends Expression {
     public String toString(int t) {
         return getTabs(t) + "(" + name.toString(0) + ")";
     }
+
+    @Override
+    public TypeData typeCheck() throws CompilerException {
+        return name.typeCheck();
+    }
     
 }

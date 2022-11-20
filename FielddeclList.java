@@ -24,5 +24,13 @@ public class FielddeclList extends Token {
         }
         return result;
     }
+
+    @Override
+    public TypeData typeCheck() throws CompilerException {
+        for (Fielddecl decl : fielddeclList) {
+            decl.typeCheck();
+        }
+        return null;
+    }
     
 }

@@ -10,5 +10,12 @@ public class Type extends Token {
     public String toString(int t) {
         return getTabs(t) + type;
     }
+
+    @Override
+    public TypeData typeCheck() throws CompilerException {
+        return null;
+    }
+
+    public String getType() { return type; }
     
 }

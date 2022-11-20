@@ -10,5 +10,10 @@ public class CommentStatement extends Statement {
     public String toString(int t) {
         return getTabs(t) + comment;
     }
+
+    @Override
+    public TypeData typeCheck() throws CompilerException {
+        return null;
+    }
     
 }

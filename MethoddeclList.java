@@ -24,5 +24,13 @@ public class MethoddeclList extends Token {
         }
         return result;
     }
+
+    @Override
+    public TypeData typeCheck() throws CompilerException {
+        for (Methoddecl methoddecl : methoddecls) {
+            methoddecl.typeCheck();
+        }
+        return null;
+    }
     
 }

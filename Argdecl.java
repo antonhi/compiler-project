@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Argdecl extends Token {
 
     private Type type;
@@ -14,5 +16,15 @@ public class Argdecl extends Token {
     public String toString(int t) {
         return getTabs(t) + type.toString(0) + " " + id + (brackets ? "[]" : "");
     }
+
+    @Override
+    public TypeData typeCheck() throws CompilerException {
+        symbolTable.addElement(id, type.getType(), false, brackets, new ArrayList<>());
+        return null;
+    }
+
+    public String getName() { return id; }
+
+    public TypeData getType() { return new TypeData(type.getType(), false, brackets, new ArrayList<>());}
     
 }

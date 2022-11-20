@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class ExpressionFielddecl extends Fielddecl {
 
     private final boolean optionalFinal;
@@ -15,6 +17,12 @@ public class ExpressionFielddecl extends Fielddecl {
     @Override
     public String toString(int t) {
         return getTabs(t) + (optionalFinal ? "final " : "") + type.toString(0) + " " + id + (optionalExpr.populated() ? " " + optionalExpr.toString(0) : "") + ";\n";
+    }
+
+    @Override
+    public TypeData typeCheck() throws CompilerException {
+        symbolTable.addElement(id, type.getType(), optionalFinal, false, new ArrayList<>());
+        return null;
     }
     
 }

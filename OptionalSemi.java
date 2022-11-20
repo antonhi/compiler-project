@@ -8,4 +8,9 @@ public class OptionalSemi extends Token {
     public String toString(int t) {
         return visible ? ";" : "";
     }
+
+    @Override
+    public TypeData typeCheck() throws CompilerException {
+        return null;
+    }
 }

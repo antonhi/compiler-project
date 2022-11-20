@@ -8,5 +8,10 @@ public class IdName extends Name {
     public String toString(int t) {
         return getTabs(t) + id;
     }
+
+    @Override
+    public TypeData typeCheck() throws CompilerException {
+        return symbolTable.get(id);
+    }
     
 }

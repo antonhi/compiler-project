@@ -22,4 +22,14 @@ public class PrintList extends Token {
         }
         return result;
     }
+
+    @Override
+    public TypeData typeCheck() throws CompilerException {
+        for (Expression ex : expressions) {
+            if (ex.typeCheck().isArray()) {
+                throw new CompilerException("Error: Tried printing array");
+            }
+        }
+        return null;
+    }
 }

@@ -1,5 +1,0 @@
-class onlyFields {
-	int x;
-	char y;
-	float z;
-}

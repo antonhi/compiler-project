@@ -10,5 +10,10 @@ public class NestedExpression extends Expression {
     public String toString(int t) {
         return getTabs(t) + "((" + expression.toString(0) + "))";
     }
+
+    @Override
+    public TypeData typeCheck() throws CompilerException {
+        return expression.typeCheck();
+    }
     
 }

@@ -10,5 +10,11 @@ public class ReadStatement extends Statement {
     public String toString(int t) {
         return getTabs(t) + "read (" + names.toString(0) + ");\n";
     }
+
+    @Override
+    public TypeData typeCheck() throws CompilerException {
+        names.typeCheck();
+        return null;
+    }
     
 }

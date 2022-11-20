@@ -14,6 +14,14 @@ public class ArgdeclList extends Token {
         return this;
     }
 
+    public List<TypeData> getArgTypes() {
+        List<TypeData> types = new ArrayList<>();
+        for (Argdecl decl : argdecls) {
+            types.add(decl.getType());
+        }
+        return types;
+    }
+
     @Override
     public String toString(int t) {
         String result = "";
@@ -22,6 +30,14 @@ public class ArgdeclList extends Token {
             result += n.toString(0) + (++index == argdecls.size() ? "" : ", ");
         }
         return result;
+    }
+
+    @Override
+    public TypeData typeCheck() throws CompilerException {
+        for (Argdecl decl : argdecls) {
+            decl.typeCheck();
+        }
+        return null;
     }
     
 }

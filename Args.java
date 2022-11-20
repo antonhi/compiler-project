@@ -23,5 +23,21 @@ public class Args extends Token {
         }
         return result;
     }
+
+    @Override
+    public TypeData typeCheck() throws CompilerException {
+        for (Expression e : expressions) {
+            e.typeCheck();
+        }
+        return null;
+    }
+
+    public List<TypeData> getTypes() throws CompilerException{
+        List<TypeData> types = new ArrayList<>();
+        for (Expression e : expressions) {
+            types.add(e.typeCheck());
+        }
+        return types;
+    }
     
 }

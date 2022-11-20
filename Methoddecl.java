@@ -20,5 +20,16 @@ public class Methoddecl extends Token {
     public String toString(int t) {
         return getTabs(t) + (type == null ? "" : type.toString(0)) + " " + id + "(" + argdecls.toString(0) + ") {\n" + fielddeclList.toString(t+1) + (fielddeclList.isEmpty() ? "" : "\n") + statementList.toString(t+1) + getTabs(t) + "}" + optionalSemi.toString(0)+"\n";
     }
+
+    @Override
+    public TypeData typeCheck() throws CompilerException {
+        symbolTable.addElement(id, type.getType(), false, false, argdecls.getArgTypes());
+        argdecls.typeCheck();
+        symbolTable.startScope();
+        fielddeclList.typeCheck();
+        statementList.typeCheck();
+        symbolTable.endScope();
+        return null;
+    }
     
 }

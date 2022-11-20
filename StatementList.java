@@ -27,5 +27,13 @@ public class StatementList extends Token {
         }
         return result;
     }
+
+    @Override
+    public TypeData typeCheck() throws CompilerException {
+        for (Statement s : statements) {
+            s.typeCheck();
+        }
+        return null;
+    }
     
 }

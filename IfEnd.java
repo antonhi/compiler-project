@@ -33,5 +33,18 @@ public class IfEnd extends Token {
         }
         return result;
     }
+
+    @Override
+    public TypeData typeCheck() throws CompilerException {
+        symbolTable.startScope();
+        if (fielddecls != null) {
+            fielddecls.typeCheck();
+        }
+        if (statementList != null) {
+            statementList.typeCheck();
+        }
+        symbolTable.endScope();
+        return null;
+    }
     
 }

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class StringExpression extends Expression {
 
     private String string;
@@ -9,6 +11,11 @@ public class StringExpression extends Expression {
     @Override
     public String toString(int t) {
         return getTabs(t) + "(" + string + ")";
+    }
+
+    @Override
+    public TypeData typeCheck() throws CompilerException {
+        return new TypeData("string", false, false, new ArrayList<>());
     }
     
 }

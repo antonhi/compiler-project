@@ -9,4 +9,9 @@ public class OptionalFinal extends Token {
     public String toString(int t) {
         return visible ? "final" : "";
     }
+
+    @Override
+    public TypeData typeCheck() throws CompilerException {
+        return null;
+    }
 }

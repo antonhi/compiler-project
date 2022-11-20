@@ -23,5 +23,16 @@ public class ReadList extends Token {
         }
         return result;
     }
+
+    @Override
+    public TypeData typeCheck() throws CompilerException {
+        for (Name name : names) {
+            TypeData type = name.typeCheck();
+            if (type.isArray() || type.isFunction() || type.isFinal()) {
+                throw new CompilerException("Error: Tried reading array, function, or final type");
+            }
+        }
+        return null;
+    }
     
 }

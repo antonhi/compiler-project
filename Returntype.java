@@ -10,5 +10,11 @@ public class Returntype extends Token {
     public String toString(int t) {
         return type == null ? getTabs(t) + "void" : type.toString(t); 
     }
+
+    @Override
+    public TypeData typeCheck() throws CompilerException {
+        // TODO Auto-generated method stub
+        return null;
+    }
     
 }
