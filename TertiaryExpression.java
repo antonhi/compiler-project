@@ -16,10 +16,10 @@ public class TertiaryExpression extends Expression {
     @Override
     public TypeData typeCheck() throws CompilerException {
         if (!expression1.typeCheck().getType().equals("bool")) {
-            throw new CompilerException("Error: Expression 1 is not of type bool");
+            throw new CompilerException("Error: Expression 1 of ternary expression is not of type bool");
         }
         if (!expression2.typeCheck().getType().equals(expression3.typeCheck().getType())) {
-            throw new CompilerException("Error: Expression 2 is not of the same type as Expression 3");
+            throw new CompilerException("Error: Type of Expression 2 of ternary expression [" + expression2.typeCheck().toString() + "] is not the same as Expression 3 [" + expression3.typeCheck().toString() + "]");
         }
         return expression2.typeCheck();
     }

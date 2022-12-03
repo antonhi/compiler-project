@@ -20,7 +20,7 @@ public class BodyStatement extends Statement {
         symbolTable.startScope();
         fielddecls.typeCheck();
         statements.typeCheck();
-        symbolTable.endScope();
+        symbolTable.endScope(null);
         return null;
     }
     

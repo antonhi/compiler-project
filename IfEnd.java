@@ -43,7 +43,7 @@ public class IfEnd extends Token {
         if (statementList != null) {
             statementList.typeCheck();
         }
-        symbolTable.endScope();
+        symbolTable.endScope(null);
         return null;
     }
     

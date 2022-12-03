@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class ReturnStatement extends Statement {
 
     @Override
@@ -8,6 +10,10 @@ public class ReturnStatement extends Statement {
     @Override
     public TypeData typeCheck() throws CompilerException {
         return null;
+    }
+
+    public TypeData getReturnType() {
+        return new TypeData("void", false, false, new ArrayList<>());
     }
     
 }

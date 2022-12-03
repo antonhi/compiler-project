@@ -17,5 +17,7 @@ public class Type extends Token {
     }
 
     public String getType() { return type; }
+
+    public boolean isArray() { return type.contains("[]"); }
     
 }

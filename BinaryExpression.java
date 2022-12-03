@@ -34,6 +34,16 @@ public class BinaryExpression extends Expression {
             } else if (expression1.typeCheck().getType().equals("string") && expression2.typeCheck().getType().equals("string") && binaryop.getValue().equals("+")) {
                 return new TypeData("string", false, false, new ArrayList<>());
             } else {
+                switch (binaryop.getValue()) {
+                    case "+":
+                    throw new CompilerException("Error: Could not add " + expression1.typeCheck().getType() + " and " + expression2.typeCheck().getType());
+                    case "-":
+                    throw new CompilerException("Error: Could not subtract " + expression1.typeCheck().getType() + " and " + expression2.typeCheck().getType());
+                    case "*":
+                    throw new CompilerException("Error: Could not multiply " + expression1.typeCheck().getType() + " and " + expression2.typeCheck().getType());
+                    case "/":
+                    throw new CompilerException("Error: Could not divide " + expression1.typeCheck().getType() + " and " + expression2.typeCheck().getType());
+                }
                 throw new CompilerException("Error: Could not add, subtract, multiply, or divide " + expression1.typeCheck().getType() + " and " + expression2.typeCheck().getType());
             }
         }
@@ -44,7 +54,7 @@ public class BinaryExpression extends Expression {
                 throw new CompilerException("Error: Could not compare non-float or -int expressions");
             }
         }
-        return null;
+        throw new CompilerException("Error: Invalid Binary Expression");
     }
     
 }

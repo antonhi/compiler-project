@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Methoddecl extends Token {
 
     private Type type;
@@ -8,7 +10,7 @@ public class Methoddecl extends Token {
     private OptionalSemi optionalSemi;
 
     public Methoddecl (Type type, String id, Argdecls argdecls, FielddeclList fielddeclList, StatementList statementList, OptionalSemi optionalSemi) {
-        this.type = type;
+        this.type = type == null ? new Type("void") : type;
         this.id = id;
         this.argdecls = argdecls;
         this.fielddeclList = fielddeclList;
@@ -23,13 +25,20 @@ public class Methoddecl extends Token {
 
     @Override
     public TypeData typeCheck() throws CompilerException {
+        
         symbolTable.addElement(id, type.getType(), false, false, argdecls.getArgTypes());
         argdecls.typeCheck();
         symbolTable.startScope();
+        symbolTable.addReturnType(getTypeDataFromType());
         fielddeclList.typeCheck();
         statementList.typeCheck();
-        symbolTable.endScope();
+        TypeData returnType = statementList.getReturnType();
+        symbolTable.endScope(returnType);
         return null;
+    }
+
+    private TypeData getTypeDataFromType() {
+        return new TypeData(type.getType(), false, type.isArray(), new ArrayList<>());
     }
     
 }

@@ -35,5 +35,16 @@ public class StatementList extends Token {
         }
         return null;
     }
+
+    public TypeData getReturnType() throws CompilerException {
+        if (!statements.isEmpty()) {
+            if (statements.get(statements.size()-1) instanceof ReturnExpressionStatement) {
+                return ((ReturnExpressionStatement) statements.get(statements.size()-1)).getReturnType();
+            } else if (statements.get(statements.size()-1) instanceof ReturnStatement) {
+                return ((ReturnStatement) statements.get(statements.size()-1)).getReturnType();
+            }
+        }
+        return null;
+    }
     
 }

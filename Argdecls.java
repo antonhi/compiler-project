@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Argdecls extends Token {
@@ -15,11 +16,16 @@ public class Argdecls extends Token {
 
     @Override
     public TypeData typeCheck() throws CompilerException {
-        argdeclList.typeCheck();
+        if (argdeclList != null) {
+            argdeclList.typeCheck();
+        }
         return null;
     }
 
     public List<TypeData> getArgTypes() {
+        if (argdeclList == null) {
+            return new ArrayList<>();
+        }
         return argdeclList.getArgTypes();
     }
     

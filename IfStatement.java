@@ -26,7 +26,7 @@ public class IfStatement extends Statement {
         symbolTable.startScope();
         fielddecls.typeCheck();
         statements.typeCheck();
-        symbolTable.endScope();
+        symbolTable.endScope(null);
         ifEnd.typeCheck();
         return null;
     }

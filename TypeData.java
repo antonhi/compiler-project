@@ -13,7 +13,7 @@ public class TypeData {
     }
 
     public String toString () {
-        return type + " -> isFinal: " + isFinal + " -> isArray: " + isArray + " -> args: " + (args.isEmpty() ? "none" : getArgs());
+        return type + "(final: " + isFinal + " | array: " + isArray + " | args: " + (args.isEmpty() ? "none)" : getArgs() + ")");
     }
 
     public String getType() { return type; }
@@ -25,7 +25,12 @@ public class TypeData {
 
     public boolean same(TypeData typeData) {
         boolean res = typeData.getType().equals(type);
-        res = typeData.isFunction() == isArray && typeData.isArray == isArray;
+        if (!res) {
+            res = isCoercible(typeData);
+        }
+        if (!res) return false;
+        res = typeData.isFunction() == isFunction() && typeData.isArray == isArray;
+        if (!res) return false;
         res = getArgsAmount() == typeData.getArgsAmount();
         if (!res) return false;
         int index = 0;
@@ -33,6 +38,22 @@ public class TypeData {
             if (!t.getType().equals(args.get(index).getType())) return false;
         }
         return true;
+    }
+
+    private boolean isCoercible(TypeData otherType) {
+        if (isArray || isFunction() || otherType.isArray || otherType.isFunction()) {
+            return false;
+        }
+        if (type.equals("float")) {
+            if (otherType.getType().equals("int")) return true;
+        }
+        if (type.equals("bool")) {
+            if (otherType.getType().equals("int")) return true;
+        }
+        if (type.equals("int")) {
+           if (otherType.getType().equals("char")) return true;
+        }
+        return false;
     }
 
     private String getArgs() {

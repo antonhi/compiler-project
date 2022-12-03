@@ -22,7 +22,17 @@ public class ExpressionFielddecl extends Fielddecl {
     @Override
     public TypeData typeCheck() throws CompilerException {
         symbolTable.addElement(id, type.getType(), optionalFinal, false, new ArrayList<>());
+        if (optionalExpr != null && optionalExpr.populated()) {
+            optionalExpr.typeCheck();
+            if (!getTypeDataFromType().same(optionalExpr.typeCheck())) {
+                throw new CompilerException("Error: Cannot assign a value of type [" + optionalExpr.typeCheck().toString() + "] to [" + getTypeDataFromType().toString() + "]");
+            }
+        }
         return null;
+    }
+
+    private TypeData getTypeDataFromType() {
+        return new TypeData(type.getType(), false, type.isArray(), new ArrayList<>());
     }
     
 }

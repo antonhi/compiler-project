@@ -20,7 +20,11 @@ public class AssignmentStatement extends Statement {
         if (lhs == null || rhs == null) {
             throw new CompilerException("Error: " + name.id + " has not been defined and cannot be assigned");
         } else if (lhs.isFinal() || !lhs.same(rhs)) {
-            throw new CompilerException("Error: " + lhs.getType() + " is not assignable to " + rhs.getType());
+            if (lhs.isFinal()) {
+                throw new CompilerException("Error: Variable is final and cannot be reassigned");
+            } else {
+                throw new CompilerException("Error: [" + rhs.toString() + "] is not assignable to [" + lhs.toString() + "]");
+            }
         }
         return null;
     }

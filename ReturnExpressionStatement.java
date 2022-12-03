@@ -16,5 +16,9 @@ public class ReturnExpressionStatement extends Statement {
         expression.typeCheck();
         return null;
     }
+
+    public TypeData getReturnType() throws CompilerException {
+         return expression.typeCheck();
+    }
     
 }
