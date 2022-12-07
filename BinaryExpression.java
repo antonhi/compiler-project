@@ -54,7 +54,10 @@ public class BinaryExpression extends Expression {
                 throw new CompilerException("Error: Could not compare non-float or -int expressions");
             }
         }
-        throw new CompilerException("Error: Invalid Binary Expression");
+        if (binaryop.getValue().equals("&&") || binaryop.getValue().equals("||")) {
+            return new TypeData("bool", false, false, new ArrayList<>());
+        }
+        return expression1.typeCheck(); 
     }
     
 }

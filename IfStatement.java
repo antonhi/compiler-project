@@ -21,7 +21,7 @@ public class IfStatement extends Statement {
     public TypeData typeCheck() throws CompilerException {
         TypeData checkType = expression.typeCheck();
         if (!checkType.getType().equals("bool")) {
-            throw new CompilerException("Error: If statement must contain a bool expression");
+            throw new CompilerException("Error: If statement must contain a bool expression, found " + checkType.toString() + " instead");
         }
         symbolTable.startScope();
         fielddecls.typeCheck();

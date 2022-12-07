@@ -39,6 +39,7 @@ phase3.txt: all
 		$(JAVA) -cp $(CP) TypeCheckingTest charToFloat.as > charToFloat-output.txt
 		$(JAVA) -cp $(CP) TypeCheckingTest boolToInt.as > boolToInt-output.txt
 		$(JAVA) -cp $(CP) TypeCheckingTest boolToFloat.as > boolToFloat-output.txt
+		$(JAVA) -cp $(CP) TypeCheckingTest fullValidProgram.as > fullValidProgram-output.txt
 
 Phase1_order_of_ops.txt: all
         $(JAVA) -cp $(CP) LexerTest Phase1_order_of_ops.txt > Phase1_order_of_ops_output.txt
